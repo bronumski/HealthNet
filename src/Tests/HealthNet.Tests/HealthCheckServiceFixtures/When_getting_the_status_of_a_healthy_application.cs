@@ -6,7 +6,7 @@ namespace HealthNet.HealthCheckServiceFixtures
 {
     class When_getting_the_status_of_a_healthy_application : HealthCheckServiceFixtureBase
     {
-        protected override IEnumerable<ISystemStateChecker> SystemStateCheckers()
+        protected override IEnumerable<ISystemChecker> SystemStateCheckers()
         {
             yield return CreateChecker(HealthState.Good); ;
         }
@@ -20,7 +20,7 @@ namespace HealthNet.HealthCheckServiceFixtures
         [Test]
         public void All_system_states_are_Good()
         {
-            Result.Systems.Should().OnlyContain(x => x.Health == HealthState.Good);
+            Result.SystemStates.Should().OnlyContain(x => x.Health == HealthState.Good);
         }
     }
 }

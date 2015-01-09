@@ -6,7 +6,7 @@ namespace HealthNet.HealthCheckServiceFixtures
 {
     class When_getting_the_status_of_an_application_with_a_critical_non_vital_system : HealthCheckServiceFixtureBase
     {
-        protected override IEnumerable<ISystemStateChecker> SystemStateCheckers()
+        protected override IEnumerable<ISystemChecker> SystemStateCheckers()
         {
             yield return CreateChecker(HealthState.Critical, isVital: false);
         }

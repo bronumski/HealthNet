@@ -48,10 +48,10 @@
     <Compile Include="HealthCheckService.cs" />
     <Compile Include="HealthResult.cs" />
     <Compile Include="HealthState.cs" />
-    <Compile Include="ISystemStateChecker.cs" />
+    <Compile Include="ISystemChecker.cs" />
     <Compile Include="IVersionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemStateResult.cs" />
+    <Compile Include="SystemCheckResult.cs" />
     <Compile Include="VersionProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

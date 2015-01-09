@@ -8,9 +8,9 @@ namespace HealthNet
     public class HealthCheckService
     {
         private readonly IVersionProvider versionProvider;
-        private readonly IEnumerable<ISystemStateChecker> systemStateCheckers;
+        private readonly IEnumerable<ISystemChecker> systemStateCheckers;
 
-        public HealthCheckService(IVersionProvider versionProvider, IEnumerable<ISystemStateChecker> systemStateCheckers)
+        public HealthCheckService(IVersionProvider versionProvider, IEnumerable<ISystemChecker> systemStateCheckers)
         {
             this.versionProvider = versionProvider;
             this.systemStateCheckers = systemStateCheckers;
@@ -18,34 +18,51 @@ namespace HealthNet
 
         public HealthResult CheckHealth(bool intrusive = false)
         {
-            IEnumerable<SystemStateResult> systemStateResults = systemStateCheckers
-                .Select(x => CheckSystemState(intrusive, x)).Select(x => x.Result).ToArray();
+            IEnumerable<SystemCheckResult> systemCheckResults = systemStateCheckers
+                .Select(checker => CheckSystemState(intrusive, checker))
+                .Select(checkTask => checkTask.Result).ToArray();
 
             return new HealthResult
             {
                 CheckupDate = DateTime.UtcNow,
-                Health = GetOverallHealth(systemStateResults),
-                Systems = systemStateResults,
+                Health = GetOverallHealth(systemCheckResults),
+                SystemStates = systemCheckResults,
                 Version = versionProvider.GetSystemVersion()
             };
         }
 
-        private Task<SystemStateResult> CheckSystemState(bool performeIntrusive, ISystemStateChecker systemState)
+        private Task<SystemCheckResult> CheckSystemState(bool performeIntrusive, ISystemChecker systemChecker)
         {
-            return Task<SystemStateResult>.Factory.StartNew(() =>
+            return Task<SystemCheckResult>.Factory.StartNew(() =>
             {
-                if (!performeIntrusive && systemState.IsIntrusive)
+                if (!performeIntrusive && systemChecker.IsIntrusive)
                 {
-                    return new SystemStateResult
+                    return new SystemCheckResult
                     {
+                        IsVital = systemChecker.IsVital,
+                        SystemName = systemChecker.SystemName,
                         Health = HealthState.Undetermined,
+                        Message = "Intrusive check skipped"
                     };
                 }
-                return systemState.CheckSystemState();
+                try
+                {
+                    return systemChecker.CheckSystem();
+                }
+                catch (Exception ex)
+                {
+                    return new SystemCheckResult
+                    {
+                        IsVital = systemChecker.IsVital,
+                        SystemName = systemChecker.SystemName,
+                        Health = HealthState.Critical,
+                        Message = ex.Message
+                    };
+                }
             });
         }
 
-        private static HealthState GetOverallHealth(IEnumerable<SystemStateResult> systemStateResults)
+        private static HealthState GetOverallHealth(IEnumerable<SystemCheckResult> systemStateResults)
         {
             var overallState = HealthState.Good;
             

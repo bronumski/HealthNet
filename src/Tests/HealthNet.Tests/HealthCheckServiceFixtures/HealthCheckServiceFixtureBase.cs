@@ -8,7 +8,7 @@ namespace HealthNet.HealthCheckServiceFixtures
 {
     abstract class HealthCheckServiceFixtureBase
     {
-        protected abstract IEnumerable<ISystemStateChecker> SystemStateCheckers();
+        protected abstract IEnumerable<ISystemChecker> SystemStateCheckers();
         
         protected HealthResult Result { get; private set; }
 
@@ -36,14 +36,17 @@ namespace HealthNet.HealthCheckServiceFixtures
             Result.Version.Should().Be("1.2.3.4");
         }
 
-        protected ISystemStateChecker CreateChecker(HealthState state, bool isVital = true, bool isIntrusive = false)
+        protected ISystemChecker CreateChecker(HealthState state, bool isVital = true, bool isIntrusive = false, string name = "")
         {
-            var systemStateChecker = Substitute.For<ISystemStateChecker>();
-            systemStateChecker.CheckSystemState().Returns(new SystemStateResult
+            var systemStateChecker = Substitute.For<ISystemChecker>();
+            systemStateChecker.CheckSystem().Returns(new SystemCheckResult
             {
+                SystemName = name,
                 Health = state,
                 IsVital = isVital
             });
+
+            systemStateChecker.SystemName.Returns(name);
 
             systemStateChecker.IsIntrusive.Returns(isIntrusive);
             return systemStateChecker;

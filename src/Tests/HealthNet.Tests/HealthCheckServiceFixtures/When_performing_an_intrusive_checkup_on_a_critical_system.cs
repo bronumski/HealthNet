@@ -5,9 +5,11 @@ using NUnit.Framework;
 
 namespace HealthNet.HealthCheckServiceFixtures
 {
-    class When_performing_an_unobtrusive_checkup : HealthCheckServiceFixtureBase
+    class When_performing_an_intrusive_checkup_on_a_critical_system : HealthCheckServiceFixtureBase
     {
         private ISystemChecker intrusiveChecker;
+
+        protected override bool PerformeIntrusive { get { return true; } }
 
         protected override IEnumerable<ISystemChecker> SystemStateCheckers()
         {
@@ -18,31 +20,23 @@ namespace HealthNet.HealthCheckServiceFixtures
         }
 
         [Test]
-        public void Overall_health_is_Good()
+        public void Overall_health_is_Critical()
         {
-            Result.Health.Should().Be(HealthState.Good);
+            Result.Health.Should().Be(HealthState.Critical);
         }
 
         [Test]
         public void Has_a_system_with_a_Health_State_of_Undetermined()
         {
             Result.SystemStates.Should().ContainSingle(x =>
-                x.SystemName ==  "Intrusive Checker"
-                && x.Health == HealthState.Undetermined);
-        }
-
-        [Test]
-        public void Has_a_message_indicating_that_the_check_was_skipped_due_to_being_intrusive()
-        {
-            Result.SystemStates.Should().ContainSingle(x =>
                 x.SystemName == "Intrusive Checker"
-                && x.Message == "Intrusive check skipped");
+                && x.Health == HealthState.Critical);
         }
 
         [Test]
         public void Intrusive_checker_was_never_called()
         {
-            intrusiveChecker.DidNotReceive().CheckSystem();
+            intrusiveChecker.Received().CheckSystem();
         }
     }
 }
