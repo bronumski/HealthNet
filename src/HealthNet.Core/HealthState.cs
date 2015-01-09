@@ -2,7 +2,9 @@
 {
     public enum HealthState
     {
-        Unknown = 0,
+        Undetermined = 0,
         Good,
+        Serious,
+        Critical
     }
 }
