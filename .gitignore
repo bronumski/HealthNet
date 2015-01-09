@@ -1,0 +1,17 @@
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Pp]ackages/
+[Pp]ublish/
+build/_results/
+*.suo
+*.user
+_ReSharper*/
+_TeamCity*/
+*.ReSharper
+**/*.user
+**/*.suo
+*.ReSharper/
+*.dotCover
+*.dbmdl
