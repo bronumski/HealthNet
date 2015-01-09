@@ -37,13 +37,7 @@ namespace HealthNet
             {
                 if (!performeIntrusive && systemChecker.IsIntrusive)
                 {
-                    return new SystemCheckResult
-                    {
-                        IsVital = systemChecker.IsVital,
-                        SystemName = systemChecker.SystemName,
-                        Health = HealthState.Undetermined,
-                        Message = "Intrusive check skipped"
-                    };
+                    return systemChecker.CreateSkippedResult();
                 }
                 try
                 {
@@ -51,13 +45,7 @@ namespace HealthNet
                 }
                 catch (Exception ex)
                 {
-                    return new SystemCheckResult
-                    {
-                        IsVital = systemChecker.IsVital,
-                        SystemName = systemChecker.SystemName,
-                        Health = HealthState.Critical,
-                        Message = ex.Message
-                    };
+                    return systemChecker.CreateCriticalResult(ex.Message);
                 }
             });
         }

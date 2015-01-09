@@ -45,6 +45,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="CheckerExtensions.cs" />
     <Compile Include="HealthCheckService.cs" />
     <Compile Include="HealthResult.cs" />
     <Compile Include="HealthState.cs" />
