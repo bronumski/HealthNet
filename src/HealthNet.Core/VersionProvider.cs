@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace HealthNet
 {
-    class VersionProvider : IVersionProvider
+    public class VersionProvider : IVersionProvider
     {
         private static string CachedVersion;
 

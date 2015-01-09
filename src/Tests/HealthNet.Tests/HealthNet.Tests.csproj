@@ -36,8 +36,21 @@
     <Reference Include="FluentAssertions.Core">
       <HintPath>..\..\..\packages\FluentAssertions.3.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\..\..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Hosting.3.0.0\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Testing">
+      <HintPath>..\..\..\packages\Microsoft.Owin.Testing.3.0.0\lib\net45\Microsoft.Owin.Testing.dll</HintPath>
+    </Reference>
     <Reference Include="NCeption.Core">
       <HintPath>..\..\..\packages\NCeption.Core.1.0.12.0\lib\net45\NCeption.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\..\..\packages\NSubstitute.1.5.0.0\lib\NET40\NSubstitute.dll</HintPath>
@@ -45,8 +58,12 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +78,9 @@
     <Compile Include="HealthCheckServiceFixtures\When_performing_an_intrusive_checkup_on_a_critical_system.cs" />
     <Compile Include="HealthCheckServiceFixtures\When_performing_an_unobtrusive_checkup.cs" />
     <Compile Include="HealthCheckServiceFixtures\When_performing_a_checkup_and_a_checker_throws_an_exception.cs" />
+    <Compile Include="HealthNetMiddlewareFixures\When_calling_application_with_a_non_healthcheck_call.cs" />
+    <Compile Include="HealthNetMiddlewareFixures\When_getting_the_health_status_of_an_application_as_json.cs" />
+    <Compile Include="HealthNetMiddlewareFixures\When_getting_the_health_status_using_a_custom_url.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +90,10 @@
     <ProjectReference Include="..\..\HealthNet.Core\HealthNet.Core.csproj">
       <Project>{7137651C-D857-4373-8691-4A856EFCC858}</Project>
       <Name>HealthNet.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HealthNet.Owin\HealthNet.Owin.csproj">
+      <Project>{850F6E09-4C85-4A1B-974D-4B1ECE29DD37}</Project>
+      <Name>HealthNet.Owin</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
