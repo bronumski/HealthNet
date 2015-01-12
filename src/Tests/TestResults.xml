@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Dev\healthnet\src\tests\HealthNet.Tests\bin\Release\HealthNet.Tests.dll" total="45" errors="1" failures="2" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-02-03" time="13:17:56">
+  <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.8009" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="D:\Dev\healthnet" machine-name="EOS" user="Matt" user-domain="EOS" />
+  <culture-info current-culture="en-GB" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="D:\Dev\healthnet\src\tests\HealthNet.Tests\bin\Release\HealthNet.Tests.dll" executed="True" result="Failure" success="False" time="1.884" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="HealthNet" executed="True" result="Failure" success="False" time="1.878" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="HealthCheckServiceFixtures" executed="True" result="Success" success="True" time="0.432" asserts="0">
+            <results>
+              <test-suite type="TestFixture" name="When_getting_the_status_of_a_healthy_application" executed="True" result="Success" success="True" time="0.358" asserts="0">
+                <results>
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_a_healthy_application.All_system_states_are_Good" executed="True" result="Success" success="True" time="0.119" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_a_healthy_application.HealthCheckServiceFixtureBase.Date_and_time_of_the_check_should_be_returned" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_a_healthy_application.HealthCheckServiceFixtureBase.Version_of_service" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_a_healthy_application.Overall_health_is_Good" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="When_getting_the_status_of_an_application_with_a_critical_non_vital_system" executed="True" result="Success" success="True" time="0.006" asserts="0">
+                <results>
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_an_application_with_a_critical_non_vital_system.HealthCheckServiceFixtureBase.Date_and_time_of_the_check_should_be_returned" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_an_application_with_a_critical_non_vital_system.HealthCheckServiceFixtureBase.Version_of_service" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_an_application_with_a_critical_non_vital_system.Overall_health_is_Serious" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="When_getting_the_status_of_an_application_with_a_critical_vital_system" executed="True" result="Success" success="True" time="0.005" asserts="0">
+                <results>
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_an_application_with_a_critical_vital_system.HealthCheckServiceFixtureBase.Date_and_time_of_the_check_should_be_returned" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_an_application_with_a_critical_vital_system.HealthCheckServiceFixtureBase.Version_of_service" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_getting_the_status_of_an_application_with_a_critical_vital_system.Overall_health_is_Critical" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="When_performing_a_checkup_and_a_checker_throws_an_exception" executed="True" result="Success" success="True" time="0.028" asserts="0">
+                <results>
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_a_checkup_and_a_checker_throws_an_exception.All_checkers_should_still_be_called" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_a_checkup_and_a_checker_throws_an_exception.Failing_system_result_is_retuned" executed="True" result="Success" success="True" time="0.018" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_a_checkup_and_a_checker_throws_an_exception.HealthCheckServiceFixtureBase.Date_and_time_of_the_check_should_be_returned" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_a_checkup_and_a_checker_throws_an_exception.HealthCheckServiceFixtureBase.Version_of_service" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_a_checkup_and_a_checker_throws_an_exception.Overall_health_is_Critical" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="When_performing_an_intrusive_checkup_on_a_critical_system" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                <results>
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_intrusive_checkup_on_a_critical_system.Has_a_system_with_a_Health_State_of_Undetermined" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_intrusive_checkup_on_a_critical_system.HealthCheckServiceFixtureBase.Date_and_time_of_the_check_should_be_returned" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_intrusive_checkup_on_a_critical_system.HealthCheckServiceFixtureBase.Version_of_service" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_intrusive_checkup_on_a_critical_system.Intrusive_checker_was_never_called" executed="True" result="Success" success="True" time="0.008" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_intrusive_checkup_on_a_critical_system.Overall_health_is_Critical" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="When_performing_an_unobtrusive_checkup" executed="True" result="Success" success="True" time="0.011" asserts="0">
+                <results>
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_unobtrusive_checkup.Has_a_message_indicating_that_the_check_was_skipped_due_to_being_intrusive" executed="True" result="Success" success="True" time="0.002" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_unobtrusive_checkup.Has_a_system_with_a_Health_State_of_Undetermined" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_unobtrusive_checkup.HealthCheckServiceFixtureBase.Date_and_time_of_the_check_should_be_returned" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_unobtrusive_checkup.HealthCheckServiceFixtureBase.Version_of_service" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_unobtrusive_checkup.Intrusive_checker_was_never_called" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                  <test-case name="HealthNet.HealthCheckServiceFixtures.When_performing_an_unobtrusive_checkup.Overall_health_is_Good" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+          <test-suite type="Namespace" name="Integrations" executed="True" result="Failure" success="False" time="1.441" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="HealthNetMiddlewareFixures" executed="True" result="Success" success="True" time="0.432" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="When_calling_application_with_a_non_healthcheck_call" executed="True" result="Success" success="True" time="0.397" asserts="0">
+                    <results>
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_calling_application_with_a_non_healthcheck_call.Should_return_status_of_OK" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="When_getting_the_health_status_of_an_application_as_json" executed="True" result="Success" success="True" time="0.021" asserts="0">
+                    <results>
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_getting_the_health_status_of_an_application_as_json.Should_not_call_the_intrusive_checker" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_getting_the_health_status_of_an_application_as_json.Should_not_return_json_with_null_values" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_getting_the_health_status_of_an_application_as_json.Should_return_camlecase_json" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_getting_the_health_status_of_an_application_as_json.Should_return_enum_string_values" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_getting_the_health_status_of_an_application_as_json.Should_return_non_formatted_json" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_getting_the_health_status_of_an_application_as_json.Should_return_status_Ok" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="When_getting_the_health_status_using_a_custom_url" executed="True" result="Success" success="True" time="0.004" asserts="0">
+                    <results>
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_getting_the_health_status_using_a_custom_url.Should_return_status_of_OK" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="When_performing_an_intrusive_health_check" executed="True" result="Success" success="True" time="0.005" asserts="0">
+                    <results>
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_performing_an_intrusive_health_check.Should_call_the_intrusive_checker" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetMiddlewareFixures.When_performing_an_intrusive_health_check.Should_return_status_Ok" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+              <test-suite type="Namespace" name="HealthNetModuleFixtures" executed="True" result="Failure" success="False" time="1.001" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="When_getting_the_health_status" executed="True" result="Failure" success="False" time="0.900" asserts="0">
+                    <results>
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_not_call_the_intrusive_checker" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_not_return_json_with_null_values" executed="True" result="Failure" success="False" time="0.034" asserts="0">
+                        <failure>
+                          <message><![CDATA[Did not expect string "{{\"health\":1,\"systemStates\":[{{\"health\":0,\"isVital\":false,\"systemName\":null,\"message\":null}},{{\"health\":0,\"isVital\":false,\"systemName\":\"\",\"message\":\"Intrusive check skipped\"}}],\"checkupDate\":\"2015-02-03T18:17:56.2631222Z\",\"version\":\"1.0.0.0\"}}" to contain "null".]]></message>
+                          <stack-trace><![CDATA[at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message) in z:\Builds\work\b7ceef20fdfcf0ee\Shared\Execution\LateBoundTestFramework.cs:line 22
+at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Net40\Execution\TestFrameworkProvider.cs:line 42
+at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Core\Execution\DefaultAssertionStrategy.cs:line 25
+at FluentAssertions.Execution.AssertionScope.FailWith(String failureMessage, Object[] failureArgs) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Core\Execution\AssertionScope.cs:line 165
+at FluentAssertions.Primitives.StringAssertions.NotContain(String expected, String because, Object[] reasonArgs) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Core\Primitives\StringAssertions.cs:line 686
+at HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_not_return_json_with_null_values() in d:\Dev\healthnet\src\Tests\HealthNet.Tests\Integrations\HealthNetModuleFixtures\When_getting_the_health_status.cs:line 45
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_return_camlecase_json" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_return_enum_string_values" executed="True" result="Failure" success="False" time="0.002" asserts="0">
+                        <failure>
+                          <message><![CDATA[Expected string "{{\"health\":1,\"systemStates\":[{{\"health\":0,\"isVital\":false,\"systemName\":null,\"message\":null}},{{\"health\":0,\"isVital\":false,\"systemName\":\"\",\"message\":\"Intrusive check skipped\"}}],\"checkupDate\":\"2015-02-03T18:17:56.2631222Z\",\"version\":\"1.0.0.0\"}}" to contain "\"health\":\"Good\"".]]></message>
+                          <stack-trace><![CDATA[at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message) in z:\Builds\work\b7ceef20fdfcf0ee\Shared\Execution\LateBoundTestFramework.cs:line 22
+at FluentAssertions.Execution.TestFrameworkProvider.Throw(String message) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Net40\Execution\TestFrameworkProvider.cs:line 42
+at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Core\Execution\DefaultAssertionStrategy.cs:line 25
+at FluentAssertions.Execution.AssertionScope.FailWith(String failureMessage, Object[] failureArgs) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Core\Execution\AssertionScope.cs:line 165
+at FluentAssertions.Primitives.StringAssertions.Contain(String expected, String because, Object[] reasonArgs) in z:\Builds\work\b7ceef20fdfcf0ee\FluentAssertions.Core\Primitives\StringAssertions.cs:line 620
+at HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_return_enum_string_values() in d:\Dev\healthnet\src\Tests\HealthNet.Tests\Integrations\HealthNetModuleFixtures\When_getting_the_health_status.cs:line 51
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_return_non_formatted_json" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status.Should_return_status_Ok" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="When_getting_the_health_status_with_an_intrusive_checker" executed="True" result="Failure" success="False" time="0.100" asserts="0">
+                    <results>
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status_with_an_intrusive_checker.Should_not_call_intrusive_checker" executed="True" result="Error" success="False" time="0.010" asserts="0">
+                        <failure>
+                          <message><![CDATA[NSubstitute.Exceptions.ReceivedCallsException : Expected to receive a call matching:
+	CheckSystem()
+Actually received no matching calls.
+]]></message>
+                          <stack-trace><![CDATA[at NSubstitute.Core.ReceivedCallsExceptionThrower.Throw(ICallSpecification callSpecification, IEnumerable`1 matchingCalls, IEnumerable`1 nonMatchingCalls, Quantity requiredQuantity)
+at NSubstitute.Routing.Handlers.CheckReceivedCallsHandler.Handle(ICall call)
+at NSubstitute.Routing.Route.<>c__DisplayClass3.<Handle>b__0(ICallHandler x)
+at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+at NSubstitute.Routing.Route.Handle(ICall call)
+at NSubstitute.Core.CallRouter.Route(ICall call)
+at NSubstitute.Proxies.CastleDynamicProxy.CastleForwardingInterceptor.Intercept(IInvocation invocation)
+at Castle.DynamicProxy.AbstractInvocation.Proceed()
+at Castle.Proxies.ISystemCheckerProxy.CheckSystem()
+at HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status_with_an_intrusive_checker.Should_not_call_intrusive_checker() in d:\Dev\healthnet\src\Tests\HealthNet.Tests\Integrations\HealthNetModuleFixtures\When_getting_the_health_status_with_an_intrusive_checker.cs:line 44
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status_with_an_intrusive_checker.Should_return_healthcheck_result" executed="True" result="Success" success="True" time="0.064" asserts="0" />
+                      <test-case name="HealthNet.Integrations.HealthNetModuleFixtures.When_getting_the_health_status_with_an_intrusive_checker.Should_return_status_code_of_Ok" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

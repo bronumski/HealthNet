@@ -31,6 +31,12 @@ namespace HealthNet.HealthCheckServiceFixtures
         }
 
         [Test]
+        public void Host_name_should_be_returned()
+        {
+            Result.Host.Should().Be(Environment.MachineName);
+        }
+
+        [Test]
         public void Version_of_service()
         {
             Result.Version.Should().Be("1.2.3.4");

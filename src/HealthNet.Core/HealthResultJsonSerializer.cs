@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace HealthNet
 {
-    class HealthResultJsonSerializer
+    public class HealthResultJsonSerializer
     {
         private readonly JsonSerializerSettings jsonSerializerSettings;
 

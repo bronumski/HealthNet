@@ -27,7 +27,8 @@ namespace HealthNet
                 CheckupDate = DateTime.UtcNow,
                 Health = GetOverallHealth(systemCheckResults),
                 SystemStates = systemCheckResults,
-                Version = versionProvider.GetSystemVersion()
+                Version = versionProvider.GetSystemVersion(),
+                Host = Environment.MachineName
             };
         }
 

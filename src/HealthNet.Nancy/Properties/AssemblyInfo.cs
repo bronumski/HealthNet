@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("HealthNet.Owin")]
+[assembly: AssemblyTitle("HealthNet.Nancy")]
 [assembly: AssemblyDescription("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("60811833-e732-4c4f-b6f3-98cf1ed47c07")]
+[assembly: Guid("ab4d971b-62d8-4cce-903e-c1e054fcb91f")]
