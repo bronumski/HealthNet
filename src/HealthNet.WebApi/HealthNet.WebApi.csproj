@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7137651C-D857-4373-8691-4A856EFCC858}</ProjectGuid>
+    <ProjectGuid>{F45502DC-438F-44FA-A14D-C7B48F74A138}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HealthNet</RootNamespace>
-    <AssemblyName>HealthNet.Core</AssemblyName>
+    <AssemblyName>HealthNet.WebApi</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,16 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,27 +53,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\ProductInfo.cs">
-      <Link>Properties\ProductInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="CheckerExtensions.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="HealthCheckService.cs" />
-    <Compile Include="HealthResult.cs" />
-    <Compile Include="HealthResultJsonSerializer.cs" />
-    <Compile Include="HealthState.cs" />
-    <Compile Include="IHealthNetConfiguration.cs" />
-    <Compile Include="ISystemChecker.cs" />
-    <Compile Include="IVersionProvider.cs" />
+    <Compile Include="HealthCheckController.cs" />
+    <Compile Include="JsonHealthResultContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemCheckResult.cs" />
-    <Compile Include="VersionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HealthNet.Core\HealthNet.Core.csproj">
+      <Project>{7137651C-D857-4373-8691-4A856EFCC858}</Project>
+      <Name>HealthNet.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

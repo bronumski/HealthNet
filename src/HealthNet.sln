@@ -23,6 +23,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A7F39964
 		VersionInfo.cs = VersionInfo.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNet.WebApi", "HealthNet.WebApi\HealthNet.WebApi.csproj", "{F45502DC-438F-44FA-A14D-C7B48F74A138}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DC9BE1B6-EFCF-40F2-BDCB-FF7D9AC3711E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +52,10 @@ Global
 		{90F62CDB-6990-465B-93CA-49F81F658F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90F62CDB-6990-465B-93CA-49F81F658F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90F62CDB-6990-465B-93CA-49F81F658F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
