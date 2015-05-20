@@ -15,6 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNet.Nancy", "HealthNe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A7F39964-61AA-4E36-BEBA-B554BD7E2B08}"
 	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
 		..\Build.bat = ..\Build.bat
 		..\Build.fsx = ..\Build.fsx
 		nuget.config = nuget.config
