@@ -39,7 +39,25 @@ namespace HealthNet.HealthCheckServiceFixtures
         [Test]
         public void Version_of_service()
         {
-            Result.Version.Should().Be("1.2.3.4");
+            Result.SystemVersion.Should().Be("1.2.3.4");
+        }
+
+        [Test]
+        public void Should_return_total_time_taken_to_perform_health_check()
+        {
+            Result.TimeTaken
+                .Should().BeGreaterThan(TimeSpan.FromSeconds(0))
+                .And.BeLessThan(TimeSpan.FromMilliseconds(500));
+        }
+
+        [Test]
+        public void Should_return_time_taken_to_check_each_system()
+        {
+            foreach (var systemCheckResult in Result.SystemStates)
+            {
+                systemCheckResult.TimeTaken.Should().BeGreaterThan(TimeSpan.FromSeconds(0))
+                .And.BeLessThan(TimeSpan.FromMilliseconds(500));
+            }
         }
 
         protected ISystemChecker CreateChecker(HealthState state, bool isVital = true, bool isIntrusive = false, string name = "")

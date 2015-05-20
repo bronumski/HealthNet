@@ -1,4 +1,6 @@
-﻿namespace HealthNet
+﻿using System;
+
+namespace HealthNet
 {
     public class SystemCheckResult
     {
@@ -6,5 +8,6 @@
         public bool IsVital { get; set; }
         public string SystemName { get; set; }
         public string Message { get; set; }
+        public TimeSpan TimeTaken { get; set; }
     }
 }
