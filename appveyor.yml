@@ -13,7 +13,7 @@ configuration: Release
 
 before_build:
   - nuget restore "src\HealthNet.sln"
-  - nuget install "build\packages.config" -ExcludeVersion -OutPutDirectory "tools\packages"
+  - nuget install "packages.config" -ExcludeVersion -OutPutDirectory "tools\packages"
 
 build_script:
   Build.bat
