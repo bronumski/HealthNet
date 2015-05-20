@@ -1,8 +1,5 @@
 skip_tags: true
 
-before_build:
-  - nuget restore "src\HealthNet.sln"
-
 build_script:
   - Build.bat
 
