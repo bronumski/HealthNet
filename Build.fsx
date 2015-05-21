@@ -49,8 +49,6 @@ Target "Test" (fun _ ->
                 ToolName = "nunit-console-x86.exe"
                 DisableShadowCopy = true
                 OutputFile = testResultFile })
-
-    AppVeyor.UploadTestResultsXml AppVeyor.TestResultsType.NUnit testResultFile
 )
 
 Target "CreatePackage" (fun _ ->
