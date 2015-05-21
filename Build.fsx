@@ -20,6 +20,8 @@ let version = versionMajorMinor + "." + versionMacroBuild
 
 Target "Clean" (fun _ ->
     CleanDirs []
+    DeleteDir "bin"
+    CreateDir "bin"
 )
 
 Target "Version" (fun _ ->
