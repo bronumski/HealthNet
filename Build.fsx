@@ -8,6 +8,7 @@ open Fake.Git
 let testDir = "./src/tests/"
 
 let versionMajorMinor = "1.0"
+let buildVersion = versionMajorMinor + ".0.0"
 
 let commitHash = Information.getCurrentSHA1("")
 
@@ -23,7 +24,7 @@ Target "Clean" (fun _ ->
 
 Target "Version" (fun _ ->
     CreateCSharpAssemblyInfo "src/VersionInfo.cs"
-        [Attribute.Version (versionMajorMinor + ".0.0")
+        [Attribute.Version buildVersion
          Attribute.FileVersion version
          Attribute.Metadata("githash", commitHash)]
 
@@ -47,6 +48,24 @@ Target "Test" (fun _ ->
                 OutputFile = testDir + "TestResults.xml" })
 )
 
+Target "CreatePackage" (fun _ ->
+    // Copy all the package files into a package folder
+    for nuspec in !! "src/**/*.nuspec" do
+
+        let projFileName = nuspec.Replace(".nuspec", ".csproj")
+        
+        NuGetPack (fun p -> 
+            {p with
+                OutputPath = "bin"
+                WorkingDir = "bin"
+                Version = buildVersion
+                IncludeReferencedProjects = true
+                Properties = [ ("configuration", "release") ]
+                //AccessKey = myAccesskey
+                }) 
+                projFileName
+)
+
 Target "Default" (fun _ ->
     trace "Build Complete"
 )
@@ -55,6 +74,7 @@ Target "Default" (fun _ ->
  ==> "Version"
  ==> "Build"
  ==> "Test"
+ ==> "CreatePackage"
  ==> "Default"
 
 RunTargetOrDefault "Default"
