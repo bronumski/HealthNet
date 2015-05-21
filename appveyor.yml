@@ -19,8 +19,8 @@ artifacts:
 on_success:
   - git config --global credential.helper store
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - git tag -a release/$env:APPVEYOR_BUILD_VERSION
-  - git push origin release/$env:APPVEYOR_BUILD_VERSION
+  - git tag -a release/$($env:APPVEYOR_BUILD_VERSION)
+  - git push origin release/$($env:APPVEYOR_BUILD_VERSION)
 
 # deploy:
 #  provider: NuGet
