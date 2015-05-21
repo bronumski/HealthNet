@@ -2,6 +2,10 @@ version: 1.1.0.{build}
 
 skip_tags: true
 
+environment:
+  access_token:
+    secure: kqX9rn9floiE60G2C/L6s/IBktmPwQ2POWKUwU7JZVR14SIZDUXQyCeluHe0Nf1k
+
 build_script:
   - Build.bat
 
@@ -9,6 +13,12 @@ test: off
 
 artifacts:
   - path: 'bin\*.nupkg'
+
+on_success:
+  - git config --global credential.helper store
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - $ git tag -a release\{version} -m 'AppVeyor build {version}'
+  - git push origin release\{version}
 
 # deploy:
 #  provider: NuGet
