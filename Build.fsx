@@ -41,13 +41,16 @@ Target "Build" (fun _ ->
 )
 
 Target "Test" (fun _ ->
+    let testResultFile = testDir + "TestResults.xml"
     !! (testDir + "**/bin/Release/*Tests.dll")
         |> NUnit (fun p ->
             {p with
                 ToolPath = "./packages/NUnit.Runners/tools"
                 ToolName = "nunit-console-x86.exe"
                 DisableShadowCopy = true
-                OutputFile = testDir + "TestResults.xml" })
+                OutputFile = testResultFile })
+
+    AppVeyor.UploadTestResultsXml AppVeyor.TestResultsType.NUnit testResultFile
 )
 
 Target "CreatePackage" (fun _ ->
@@ -63,7 +66,6 @@ Target "CreatePackage" (fun _ ->
                 Version = buildVersion
                 IncludeReferencedProjects = true
                 Properties = [ ("configuration", "release") ]
-                //AccessKey = myAccesskey
                 }) 
                 projFileName
 )
