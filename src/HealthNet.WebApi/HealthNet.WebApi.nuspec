@@ -5,7 +5,7 @@
     <version>$version$</version>
     <authors>bronumski</authors>
     <owners>bronumski</owners>
-    <licenseUrl>https://github.com/bronumski/HealthNet/blob/master/License.md</licenseUrl>
+    <licenseUrl>https://github.com/bronumski/HealthNet/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/bronumski/HealthNet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
