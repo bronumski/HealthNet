@@ -14,6 +14,7 @@ let commitHash = Information.getCurrentSHA1("")
 
 let versionMacroBuild = 
     match buildServer with
+    | AppVeyor -> ("0." + appVeyorBuildVersion.Replace("1.0.0.", ""))
     | _ -> "0.0"
 
 let version = versionMajorMinor + "." + versionMacroBuild
