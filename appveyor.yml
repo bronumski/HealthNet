@@ -25,8 +25,8 @@ on_success:
   - git remote set-url origin https://github.com/bronumski/HealthNet.git
   - git push origin release/%APPVEYOR_BUILD_VERSION%
 
-# deploy:
-#  provider: NuGet
-#  api_key:
-#    secure: UWLHsXH6B9+FIAZ4HCbSnvKBAi1LHvmA3JLtLfjUccKRIUwS1VgutW5j9UkizRBn
-#  artifact: /.*\.nupkg/
+deploy:
+    provider: NuGet
+    api_key:
+        secure: UWLHsXH6B9+FIAZ4HCbSnvKBAi1LHvmA3JLtLfjUccKRIUwS1VgutW5j9UkizRBn
+    artifact: /.*\.nupkg/
