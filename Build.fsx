@@ -8,7 +8,7 @@ open Fake.Git
 let testDir = "./src/tests/"
 
 let versionMajorMinor = "1.0"
-let buildVersion = versionMajorMinor + ".0.0"
+let version = versionMajorMinor + ".0.0"
 
 let commitHash = Information.getCurrentSHA1("")
 
@@ -17,7 +17,7 @@ let versionMacroBuild =
     | AppVeyor -> ("0." + appVeyorBuildVersion.Replace("1.0.0.", ""))
     | _ -> "0.0"
 
-let version = versionMajorMinor + "." + versionMacroBuild
+let buildVersion = versionMajorMinor + "." + versionMacroBuild
 
 Target "Clean" (fun _ ->
     CleanDirs []
@@ -27,8 +27,8 @@ Target "Clean" (fun _ ->
 
 Target "Version" (fun _ ->
     CreateCSharpAssemblyInfo "src/VersionInfo.cs"
-        [Attribute.Version buildVersion
-         Attribute.FileVersion version
+        [Attribute.Version version
+         Attribute.FileVersion buildVersion
          Attribute.Metadata("githash", commitHash)]
 
     match buildServer with
