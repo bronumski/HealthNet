@@ -1,4 +1,6 @@
-﻿namespace HealthNet
+﻿using System;
+
+namespace HealthNet
 {
     public static class CheckerExtensions
     {

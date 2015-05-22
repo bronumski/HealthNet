@@ -134,6 +134,8 @@
     <Compile Include="Integrations\When_getting_the_health_status_using_a_custom_url.cs" />
     <Compile Include="Integrations\When_performing_an_intrusive_health_check.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemCheckerBaseFixtures\When_checking_an_unhealthy_system.cs" />
+    <Compile Include="SystemCheckerBaseFixtures\When_checking_a_healthy_system.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
