@@ -1,6 +1,6 @@
 ﻿namespace HealthNet
 {
-    static class CheckerExtensions
+    public static class CheckerExtensions
     {
         public static SystemCheckResult CreateGoodResult(this ISystemChecker systemChecker)
         {
