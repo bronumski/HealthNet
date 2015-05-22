@@ -21,9 +21,9 @@ on_success:
   - git config --global user.email "healthnet@appveyor.com"
   - git config --global user.name "AppVeyor HealthNet Build"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - git tag -a release/$(version) -m "AppVeyor build $(version)"
+  - git tag -a release/%APPVEYOR_BUILD_VERSION% -m "AppVeyor build %APPVEYOR_BUILD_VERSION%"
   - git remote set-url origin https://github.com/bronumski/HealthNet.git
-  - git push origin release/$(version)
+  - git push origin release/%APPVEYOR_BUILD_VERSION%
 
 # deploy:
 #  provider: NuGet
