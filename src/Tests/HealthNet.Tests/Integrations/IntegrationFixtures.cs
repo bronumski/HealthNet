@@ -34,7 +34,7 @@ namespace HealthNet.Integrations
 
         protected virtual IHealthNetConfiguration GetConfiguration()
         {
-            return new HealthNetConfiguration();
+            return new TestHealthNetConfiguration();
         }
 
         protected virtual string Path { get { return "/api/healthcheck" + (IsIntrusive ? "?intrusive=true" : string.Empty); } }

@@ -136,6 +136,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemCheckerBaseFixtures\When_checking_an_unhealthy_system.cs" />
     <Compile Include="SystemCheckerBaseFixtures\When_checking_a_healthy_system.cs" />
+    <Compile Include="TestHealthNetConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

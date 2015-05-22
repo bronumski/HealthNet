@@ -52,6 +52,7 @@
     <Compile Include="CheckerExtensions.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="HealthCheckService.cs" />
+    <Compile Include="HealthNetConfiguration.cs" />
     <Compile Include="HealthResult.cs" />
     <Compile Include="HealthResultJsonSerializer.cs" />
     <Compile Include="HealthState.cs" />

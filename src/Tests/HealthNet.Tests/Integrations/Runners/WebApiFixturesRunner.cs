@@ -24,18 +24,20 @@ namespace HealthNet.Integrations.Runners
             var assemblyResolver = new AssembliesResolver();
             httpConfiguration.Services.Replace(typeof(IAssembliesResolver), assemblyResolver);
 
-            httpConfiguration.DependencyResolver = new DependencyResolver(checkers);
+            httpConfiguration.DependencyResolver = new DependencyResolver(configuration, checkers);
 
             return app.UseWebApi(httpConfiguration);
         }
     }
 
-    public class DependencyResolver : IDependencyResolver
+    class DependencyResolver : IDependencyResolver
     {
+        private readonly IHealthNetConfiguration configuration;
         private readonly IEnumerable<ISystemChecker> checkers;
 
-        public DependencyResolver(IEnumerable<ISystemChecker> checkers)
+        public DependencyResolver(IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
         {
+            this.configuration = configuration;
             this.checkers = checkers;
         }
 
@@ -46,11 +48,7 @@ namespace HealthNet.Integrations.Runners
 
         public object GetService(Type serviceType)
         {
-            if (serviceType == typeof (HealthCheckController))
-            {
-                return new HealthCheckController(checkers);
-            }
-            return null;
+            return serviceType == typeof(HealthCheckController) ? new HealthCheckController(configuration, checkers) : null;
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
@@ -64,7 +62,7 @@ namespace HealthNet.Integrations.Runners
         }
     }
 
-    public class AssembliesResolver : DefaultAssembliesResolver
+    class AssembliesResolver : DefaultAssembliesResolver
     {
         public override ICollection<Assembly> GetAssemblies()
         {

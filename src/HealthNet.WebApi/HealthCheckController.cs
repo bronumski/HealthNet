@@ -6,10 +6,12 @@ namespace HealthNet
 {
     public class HealthCheckController : ApiController
     {
+        private readonly IHealthNetConfiguration configuration;
         private readonly IEnumerable<ISystemChecker> checkers;
 
-        public HealthCheckController(IEnumerable<ISystemChecker> checkers)
+        public HealthCheckController(IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
         {
+            this.configuration = configuration;
             this.checkers = checkers;
         }
 
@@ -17,7 +19,7 @@ namespace HealthNet
         {
             return new HttpResponseMessage
             {
-                Content = new JsonHealthResultContent(new HealthCheckService(new VersionProvider(), checkers).CheckHealth(intrusive))
+                Content = new JsonHealthResultContent(new HealthCheckService(new VersionProvider(configuration), checkers).CheckHealth(intrusive))
             };
         }
     }
