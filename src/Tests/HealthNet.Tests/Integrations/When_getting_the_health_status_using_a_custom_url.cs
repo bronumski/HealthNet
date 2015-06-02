@@ -1,7 +1,6 @@
 using System.Net;
 using FluentAssertions;
 using HealthNet.Integrations.Runners;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace HealthNet.Integrations
@@ -15,9 +14,7 @@ namespace HealthNet.Integrations
 
         protected override IHealthNetConfiguration GetConfiguration()
         {
-            var healthNetConfiguration = Substitute.For<IHealthNetConfiguration>();
-            healthNetConfiguration.Path.Returns(Path);
-            return healthNetConfiguration;
+            return new TestHealthNetConfiguration(Path);
         }
 
         [Test]

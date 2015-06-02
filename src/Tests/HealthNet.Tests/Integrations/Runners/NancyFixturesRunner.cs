@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HealthNet.Nancy;
+using Nancy;
 using Nancy.Testing;
 using Owin;
 
@@ -13,7 +14,15 @@ namespace HealthNet.Integrations.Runners
                 .UseNancy(x =>
                     x.Bootstrapper =
                         new ConfigurableBootstrapper(
-                            y => y.Module<HealthNetModule>().DisableAutoRegistrations().Dependency(checkers).Dependency(healthNetConfiguration)));
+                            y => y.Module<HealthNetModule>().Module<FooModule>().DisableAutoRegistrations().Dependency(checkers).Dependency(healthNetConfiguration)));
+        }
+
+        class FooModule : NancyModule
+        {
+            public FooModule() : base("Foo")
+            {
+                Get[""] = p => "Hello World";
+            }
         }
     }
 }

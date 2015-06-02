@@ -23,19 +23,23 @@ namespace HealthNet
 
         public async Task Invoke(Env environment)
         {
-            if (!IsCallToHealthCheck(environment)) await next.Invoke(environment);
+            if (IsCallToHealthCheck(environment))
+            {
+                var responseHeaders = (IDictionary<string, string[]>) environment["owin.ResponseHeaders"];
+                responseHeaders["Content-Type"] = new[] {Constants.Response.ContentType.Json};
 
-            var responseHeaders = (IDictionary<string, string[]>) environment["owin.ResponseHeaders"];
-            responseHeaders["Content-Type"] = new[] {Constants.Response.ContentType.Json};
+                var responseStream = (Stream) environment["owin.ResponseBody"];
 
-            var responseStream = (Stream) environment["owin.ResponseBody"];
+                var healthCheckService = new HealthCheckService(new VersionProvider(configuration),
+                    systemCheckerResolverFactory());
+                var result = healthCheckService.CheckHealth(IsIntrusive(environment));
 
-            var healthCheckService = new HealthCheckService(new VersionProvider(configuration), systemCheckerResolverFactory());
-            var result = healthCheckService.CheckHealth(IsIntrusive(environment));
+                var contentLength = new HealthResultJsonSerializer().SerializeToStream(responseStream, result);
 
-            var contentLength = new HealthResultJsonSerializer().SerializeToStream(responseStream, result);
-
-            responseHeaders["Content-Length"] = new[] { contentLength.ToString("D") };
+                responseHeaders["Content-Length"] = new[] {contentLength.ToString("D")};
+            }
+            else
+                await next.Invoke(environment);
         }
 
         private bool IsCallToHealthCheck(Env environment)
