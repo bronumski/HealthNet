@@ -67,7 +67,7 @@ namespace HealthNet
             }
             try
             {
-                return systemChecker.CheckSystem();
+                return systemChecker.CheckSystem() ?? systemChecker.CreateResult(HealthState.Undetermined, "Null result returned");
             }
             catch (Exception ex)
             {
