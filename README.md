@@ -126,7 +126,9 @@ protected override void ConfigureApplicationContainer(TinyIoCContainer container
 {
   ...
   container.Register<IHealthNetConfiguration, MyCustomHealthCheckConfiguration>().AsSingleton();
-  container.RegisterMultiple<ISystemChecker>(new[] {typeof (MyCustomSystemChecker), typeof (MyOtherCustinSystemChecker)});
+  container.RegisterMultiple<ISystemChecker>(
+    new[] {typeof (MyCustomSystemChecker),
+    typeof (MyOtherCustinSystemChecker)});
   ...
 }
 ```
@@ -136,7 +138,9 @@ protected override void ConfigureApplicationContainer(TinyIoCContainer container
 If you so desire you can invoke the `HealthCheckServiceDirectly`. This will give you more control over the path and how the version is derived.
 
 ```csharp
-var healthCheckService = new HealthCheckService(new CustomVersionProvider(), new [] { new CustomSystemChecker() });
+var healthCheckService = new HealthCheckService(
+  new CustomVersionProvider(),
+  new [] { new CustomSystemChecker() });
 ```
 
 [![Build status](https://ci.appveyor.com/api/projects/status/05xrcyeej88itj1b?svg=true)](https://ci.appveyor.com/project/bronumski/healthnet)
