@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using Nancy;
@@ -23,7 +22,7 @@ namespace HealthNet.Nancy
 
                 Action<Stream> performeHealthCheck = stream => new HealthResultJsonSerializer().SerializeToStream(stream, healthChecker.CheckHealth(intrusive));
 
-                return new Response { Contents = performeHealthCheck, ContentType = Constants.Response.ContentType.Json, StatusCode = HttpStatusCode.OK };
+                return new Response { Contents = performeHealthCheck, ContentType = Constants.Response.ContentType.Json + "; charset=utf-8", StatusCode = HttpStatusCode.OK };
             };
         }
     }

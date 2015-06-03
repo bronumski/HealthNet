@@ -11,7 +11,7 @@ namespace HealthNet
         private readonly MemoryStream _Stream = new MemoryStream();
         public JsonHealthResultContent(HealthResult value)
         {
-            Headers.ContentType = new MediaTypeHeaderValue(Constants.Response.ContentType.Json);
+            Headers.ContentType = new MediaTypeHeaderValue(Constants.Response.ContentType.Json) { CharSet = "utf-8" };
             new HealthResultJsonSerializer().SerializeToStream(_Stream, value);
             _Stream.Position = 0;
         }

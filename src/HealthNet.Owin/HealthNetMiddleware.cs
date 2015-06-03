@@ -26,7 +26,7 @@ namespace HealthNet
             if (IsCallToHealthCheck(environment))
             {
                 var responseHeaders = (IDictionary<string, string[]>) environment["owin.ResponseHeaders"];
-                responseHeaders["Content-Type"] = new[] {Constants.Response.ContentType.Json};
+                responseHeaders["Content-Type"] = new[] {Constants.Response.ContentType.Json + "; charset=utf-8"};
 
                 var responseStream = (Stream) environment["owin.ResponseBody"];
 

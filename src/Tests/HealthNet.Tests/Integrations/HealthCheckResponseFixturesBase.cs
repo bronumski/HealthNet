@@ -10,6 +10,7 @@ namespace HealthNet.Integrations
         public void Should_have_json_content()
         {
             Response.Content.Headers.ContentType.MediaType.Should().Be("application/json");
+            Response.Content.Headers.ContentType.CharSet.Should().Be("utf-8");
         }
 
         [Test]
