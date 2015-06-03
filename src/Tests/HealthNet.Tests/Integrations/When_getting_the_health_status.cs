@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace HealthNet.Integrations
 {
-    class When_getting_the_health_status<TFixtureRunner> : IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
+    class When_getting_the_health_status<TFixtureRunner> : HealthCheckResponseFixturesBase<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
     {
         private ISystemChecker intrusiveSystemChecker;
 

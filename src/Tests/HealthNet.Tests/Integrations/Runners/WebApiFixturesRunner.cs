@@ -16,11 +16,10 @@ namespace HealthNet.Integrations.Runners
             var httpConfiguration = new HttpConfiguration();
             httpConfiguration.Routes.MapHttpRoute(
                 name: "HealthCheck",
-                routeTemplate: "api/healthcheck",
+                routeTemplate: configuration.Path.Remove(0, 1),
                 defaults: new { Controller = "HealthCheck" }
             );
 
-            
             var assemblyResolver = new AssembliesResolver();
             httpConfiguration.Services.Replace(typeof(IAssembliesResolver), assemblyResolver);
 
@@ -41,10 +40,7 @@ namespace HealthNet.Integrations.Runners
             this.checkers = checkers;
         }
 
-        public void Dispose()
-        {
-            
-        }
+        public void Dispose() {}
 
         public object GetService(Type serviceType)
         {

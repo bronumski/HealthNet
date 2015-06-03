@@ -125,6 +125,7 @@
     <Compile Include="HealthCheckServiceFixtures\When_performing_an_intrusive_checkup_on_a_critical_system.cs" />
     <Compile Include="HealthCheckServiceFixtures\When_performing_an_unobtrusive_checkup.cs" />
     <Compile Include="HealthCheckServiceFixtures\When_performing_a_checkup_and_a_checker_throws_an_exception.cs" />
+    <Compile Include="Integrations\HealthCheckResponseFixturesBase.cs" />
     <Compile Include="Integrations\Runners\IFixtureRunner.cs" />
     <Compile Include="Integrations\IntegrationFixtures.cs" />
     <Compile Include="Integrations\Runners\NancyFixturesRunner.cs" />

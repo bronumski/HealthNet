@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace HealthNet.Integrations
 {
-    class When_getting_the_health_status_using_a_custom_url<TFixtureRunner> : IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
+    class When_getting_the_health_status_using_a_custom_url<TFixtureRunner> : HealthCheckResponseFixturesBase<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
     {
         protected override string Path
         {
