@@ -49,6 +49,7 @@ public class TestSystemChecker : ISystemChecker
 
 The system checker base class takes care of the basics. It defaults to an unobtrusive vital system checker, this can be overriden.
 The check is performed in the `PerformCheck` method, if the system is in bad health an exception should be thrown otherwise there is no need to do anything.
+The base class also derives the name of the system from the name of the class, if the class name has "SystemChecker" as suffix then it will be removed.
 
 ```csharp
 public class TestSystemChecker : SystemCheckerBase
