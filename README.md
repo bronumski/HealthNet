@@ -1,28 +1,23 @@
-# HealthNet (Documentation still in progress)
-.Net health check endpoint
+# HealthNet
+**.Net health check endpoint**
 
+HealthNet provides a simple way of exposing a health check endpoint to any .net application.
+It provides a mechanism to query your application and view the overall state and sub states of your application.
+HealthNet is modelled similarly to how we would view a health check of the human body.
 
-HealthNet provides a simple way of exposing a health check endpoint to any .net application
-
-## Configuration
-
-A custom configuration object is required to get the hosting path and also determin the application version number.
-The path is exposed by the the Path property on the `IHealthNetConfiguration` interface. The version is done by looking at the file version of the Assembly where the configuration object is defined. Implementing can either by done by implementing the `IHealthNetConfiguration` interface directly or by inheriting from `HealthNetConfiguration`. The later will default the path to `\api\healthcheck`.
-
-```csharp
-public class CustomHealthCheckConfiguration : IHealthNetConfiguration
-{
-  public sttring Path { get { return "\foo\bar"; } }
-}
-
-public class CustmHealthCheckConfiguration : HealthNetConfiguration {}
-```
-
+The medical system uses a set of [Medical States](http://en.wikipedia.org/wiki/Medical_state) to describe the state of a  patient, as such our application can either be in a Good, Serious, Critical or Undetermined state.
+Also the human body is made up of a number of [Systems](http://en.wikipedia.org/wiki/List_of_systems_of_the_human_body), we can apply that same principal to our applications.
+Applications are dependent on a number of components either internally or remote, we can apply the same set of states mentioned previously to each of these systems.
+These systems can either be vital, such as the brain or a database without which the body or application would not work.
+Alternativly vision is not so important but it makes life easier, the same could be said of an email system.
+So our overall state of the application can determined by the state of its systems and how vital they are.
+Additionally some checks to see how a system is performing can be intrusive and others not so, think colonoscopy.
+In terms of our applications an intrusive check may be time consuming or degrade performance.
 
 ## Creating System Checkers
 
 There are two ways to create a system checker. Either by implementing the `ISystemChecker` interface or by inheriting from the `SystemCheckerBase`.
-The interface gives you full flexability where as the base class simplifies the impementation.
+The interface gives you full flexibility whereas the base class simplifies the implementation.
 
 ### ISystemChecker
 
@@ -52,8 +47,8 @@ public class TestSystemChecker : ISystemChecker
 
 ### SystemCheckerBase
 
-The system checker base class takes care of the basics. It defaults to an unobtrosive vital system checker, this can be overriden.
-The check is performed in the `PerformCheck method, if the system is in bad health an exception should be thrown otherwise there is no need to do anything.
+The system checker base class takes care of the basics. It defaults to an unobtrusive vital system checker, this can be overriden.
+The check is performed in the `PerformCheck` method, if the system is in bad health an exception should be thrown otherwise there is no need to do anything.
 
 ```csharp
 public class TestSystemChecker : SystemCheckerBase
@@ -66,6 +61,20 @@ public class TestSystemChecker : SystemCheckerBase
     }
   }
 }
+```
+
+## Configuration
+
+A custom configuration object is required to get the hosting path and also determine the application version number.
+The path is exposed by the the Path property on the `IHealthNetConfiguration` interface. The version is done by looking at the file version of the Assembly where the configuration object is defined. Implementing can either by done by implementing the `IHealthNetConfiguration` interface directly or by inheriting from `HealthNetConfiguration`. The later will default the path to `\api\healthcheck`.
+
+```csharp
+public class CustomHealthCheckConfiguration : IHealthNetConfiguration
+{
+  public sttring Path { get { return "\foo\bar"; } }
+}
+
+public class CustmHealthCheckConfiguration : HealthNetConfiguration {}
 ```
 
 ## Wiring it up
@@ -141,6 +150,70 @@ If you so desire you can invoke the `HealthCheckServiceDirectly`. This will give
 var healthCheckService = new HealthCheckService(
   new CustomVersionProvider(),
   new [] { new CustomSystemChecker() });
+```
+
+## Calling the health check
+
+There are two modes to calling the health check, the basic call will call the checker and run all the non-intrusive System Checks or for a more thorough investigation an intrusive check can be done.
+
+```
+$ curl http://host/api/healthcheck
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=utf-8
+```
+```json
+{
+    "host": "host1",
+    "checkupDate": "2015-06-03T15:08:35.8104214Z",
+    "health": "Good",
+    "systemStates": [
+        {
+            "health": "Good",
+            "isVital": true,
+            "systemName": "Non Intrusive Health Check",
+            "timeTaken": "00:00:00.5014515"
+        },
+        {
+            "health": "Undetermind",
+            "isVital": true,
+            "message": "Intrusive check skipped",
+            "systemName": "Intrusive Health Check",
+            "timeTaken": "00:00:00.000"
+        }
+    ],
+    "systemVersion": "1.2.3.4",
+    "timeTaken": "00:00:00.5088545"
+}
+```
+
+```
+$ curl http://host/api/healthcheck?intrusive=true
+
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=utf-8
+```
+```json
+{
+    "host": "host2",
+    "checkupDate": "2015-06-03T15:08:35.8104214Z",
+    "health": "Good",
+    "systemStates": [
+        {
+            "health": "Good",
+            "isVital": true,
+            "systemName": "Non Intrusive Health Check",
+            "timeTaken": "00:00:00.5014515"
+        },
+        {
+            "health": "Good",
+            "isVital": true,
+            "systemName": "Intrusive Health Check",
+            "timeTaken": "00:00:00.000"
+        }
+    ],
+    "systemVersion": "1.2.3.4",
+    "timeTaken": "00:00:00.5088545"
+}
 ```
 
 [![Build status](https://ci.appveyor.com/api/projects/status/05xrcyeej88itj1b?svg=true)](https://ci.appveyor.com/project/bronumski/healthnet)
