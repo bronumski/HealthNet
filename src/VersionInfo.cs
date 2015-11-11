@@ -3,3 +3,9 @@ using System.Reflection;
 
 [assembly: AssemblyVersionAttribute("1.0.0.0")]
 [assembly: AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: AssemblyMetadataAttribute("githash","996b400b37fafe007f88bcd71e2984f5d94c5b3b")]
+namespace System {
+    internal static class AssemblyVersionInformation {
+        internal const string Version = "1.0.0.0";
+    }
+}
