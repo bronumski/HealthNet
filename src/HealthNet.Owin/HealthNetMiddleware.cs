@@ -34,9 +34,14 @@ namespace HealthNet
                     systemCheckerResolverFactory());
                 var result = healthCheckService.CheckHealth(IsIntrusive(environment));
 
-                var contentLength = new HealthResultJsonSerializer().SerializeToStream(responseStream, result);
+                using (var writeStream = new MemoryStream())
+                {
+                    var contentLength = new HealthResultJsonSerializer().SerializeToStream(writeStream, result);
+                    responseHeaders["Content-Length"] = new[] { contentLength.ToString("D") };
+                    writeStream.Position = 0;
 
-                responseHeaders["Content-Length"] = new[] {contentLength.ToString("D")};
+                    writeStream.CopyTo(responseStream);
+                }
             }
             else
                 await next.Invoke(environment);
