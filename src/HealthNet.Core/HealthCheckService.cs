@@ -8,11 +8,13 @@ namespace HealthNet
 {
     public class HealthCheckService
     {
+        private readonly IHealthNetConfiguration healthNetConfiguration;
         private readonly IVersionProvider versionProvider;
         private readonly IEnumerable<ISystemChecker> systemStateCheckers;
 
-        public HealthCheckService(IVersionProvider versionProvider, IEnumerable<ISystemChecker> systemStateCheckers)
+        public HealthCheckService(IHealthNetConfiguration healthNetConfiguration, IVersionProvider versionProvider, IEnumerable<ISystemChecker> systemStateCheckers)
         {
+            this.healthNetConfiguration = healthNetConfiguration;
             this.versionProvider = versionProvider;
             this.systemStateCheckers = systemStateCheckers;
         }
@@ -49,7 +51,11 @@ namespace HealthNet
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
                 
-                var result = GetSystemCheckResult(performeIntrusive, systemChecker);
+                var getResultsTask = Task<SystemCheckResult>.Factory.StartNew(() => GetSystemCheckResult(performeIntrusive, systemChecker));
+
+                var result = getResultsTask.Wait(TimeSpan.FromSeconds(2))
+                    ? getResultsTask.Result
+                    : systemChecker.CreateTimeoutResult();
                 
                 stopwatch.Stop();
 

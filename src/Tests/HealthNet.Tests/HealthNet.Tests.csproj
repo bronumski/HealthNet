@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HealthCheckServiceFixtures\HealthCheckServiceFixtureBase.cs" />
+    <Compile Include="HealthCheckServiceFixtures\When_getting_the_status_and_a_system_check_overruns.cs" />
     <Compile Include="HealthCheckServiceFixtures\When_getting_the_status_of_an_application_with_a_critical_non_vital_system.cs" />
     <Compile Include="HealthCheckServiceFixtures\When_getting_the_status_of_an_application_with_a_critical_vital_system.cs" />
     <Compile Include="HealthCheckServiceFixtures\When_getting_the_status_of_a_healthy_application.cs" />

@@ -20,7 +20,7 @@ namespace HealthNet.HealthCheckServiceFixtures
             var versionProvider = Substitute.For<IVersionProvider>();
             versionProvider.GetSystemVersion().Returns("1.2.3.4");
 
-            var service = new HealthCheckService(versionProvider, SystemStateCheckers());
+            var service = new HealthCheckService(null, versionProvider, SystemStateCheckers());
             Result = service.CheckHealth(PerformeIntrusive);
         }
 

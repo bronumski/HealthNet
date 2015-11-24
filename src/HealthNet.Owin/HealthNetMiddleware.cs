@@ -30,7 +30,7 @@ namespace HealthNet
 
                 var responseStream = (Stream) environment["owin.ResponseBody"];
 
-                var healthCheckService = new HealthCheckService(new VersionProvider(configuration),
+                var healthCheckService = new HealthCheckService(null, new VersionProvider(configuration),
                     systemCheckerResolverFactory());
                 var result = healthCheckService.CheckHealth(IsIntrusive(environment));
 

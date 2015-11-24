@@ -19,6 +19,11 @@ namespace HealthNet
             return systemChecker.CreateResult(HealthState.Undetermined, "Intrusive check skipped");
         }
 
+        public static SystemCheckResult CreateTimeoutResult(this ISystemChecker systemChecker)
+        {
+            return systemChecker.CreateResult(HealthState.Serious, "System check timed out");
+        }
+
         public static SystemCheckResult CreateResult(this ISystemChecker systemChecker, HealthState state, string message)
         {
             return new SystemCheckResult
