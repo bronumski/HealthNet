@@ -12,7 +12,7 @@ namespace HealthNet.Nancy
         {
             Get[""] = p =>
             {
-                var healthChecker = new HealthCheckService(null, new VersionProvider(configuration), systemCheckers);
+                var healthChecker = new HealthCheckService(configuration, new VersionProvider(configuration), systemCheckers);
 
                 var intrusive = false;
                 if (Request.Query.intrusive != null)

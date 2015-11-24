@@ -25,8 +25,11 @@ namespace HealthNet.HealthCheckServiceFixtures
 
             var healthyChecker = Substitute.For<ISystemChecker>();
             healthyChecker.CheckSystem().Returns(x => new SystemCheckResult { SystemName = "Healthy checker", Health = HealthState.Good });
+            
+            var healthNetConfiguration = Substitute.For<IHealthNetConfiguration>();
+            healthNetConfiguration.DefaultSystemCheckTimeout.Returns(TimeSpan.FromSeconds(1));
 
-            var service = new HealthCheckService(null, Substitute.For<IVersionProvider>(), new[] { hangingChecker, healthyChecker });
+            var service = new HealthCheckService(healthNetConfiguration, Substitute.For<IVersionProvider>(), new[] { hangingChecker, healthyChecker });
 
             var task = Task<HealthResult>.Factory.StartNew(() => service.CheckHealth());
             if (Task.WaitAll(new Task[] {task}, TimeSpan.FromSeconds(5)))

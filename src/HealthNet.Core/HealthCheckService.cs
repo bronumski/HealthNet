@@ -53,7 +53,7 @@ namespace HealthNet
                 
                 var getResultsTask = Task<SystemCheckResult>.Factory.StartNew(() => GetSystemCheckResult(performeIntrusive, systemChecker));
 
-                var result = getResultsTask.Wait(TimeSpan.FromSeconds(2))
+                var result = getResultsTask.Wait(healthNetConfiguration.DefaultSystemCheckTimeout)
                     ? getResultsTask.Result
                     : systemChecker.CreateTimeoutResult();
                 

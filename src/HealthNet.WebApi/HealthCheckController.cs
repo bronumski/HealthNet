@@ -19,7 +19,7 @@ namespace HealthNet
         {
             return new HttpResponseMessage
             {
-                Content = new JsonHealthResultContent(new HealthCheckService(null, new VersionProvider(configuration), checkers).CheckHealth(intrusive))
+                Content = new JsonHealthResultContent(new HealthCheckService(configuration, new VersionProvider(configuration), checkers).CheckHealth(intrusive))
             };
         }
     }
