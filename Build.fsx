@@ -7,7 +7,7 @@ open Fake.Git
 
 let testDir = "./src/tests/"
 
-let versionMajorMinor = "1.0"
+let versionMajorMinor = "1.1"
 let version = versionMajorMinor + ".0.0"
 
 let commitHash = Information.getCurrentSHA1("")
