@@ -15,10 +15,10 @@ namespace HealthNet.Integrations.Runners
         {
             var httpConfiguration = new HttpConfiguration();
             httpConfiguration.Routes.MapHttpRoute(
-                name: "HealthCheck",
                 routeTemplate: configuration.Path.Remove(0, 1),
+                name: "HealthCheck",
                 defaults: new { Controller = "HealthCheck" }
-            );
+                );
 
             var assemblyResolver = new AssembliesResolver();
             httpConfiguration.Services.Replace(typeof(IAssembliesResolver), assemblyResolver);

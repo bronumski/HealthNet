@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HealthNet
+﻿namespace HealthNet
 {
     public static class CheckerExtensions
     {

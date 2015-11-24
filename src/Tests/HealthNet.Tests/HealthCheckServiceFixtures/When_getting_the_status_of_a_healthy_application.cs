@@ -8,7 +8,7 @@ namespace HealthNet.HealthCheckServiceFixtures
     {
         protected override IEnumerable<ISystemChecker> SystemStateCheckers()
         {
-            yield return CreateChecker(HealthState.Good); ;
+            yield return CreateChecker(HealthState.Good);
         }
 
         [Test]

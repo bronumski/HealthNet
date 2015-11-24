@@ -1,6 +1,6 @@
 ﻿namespace HealthNet
 {
-    public class Constants
+    public static class Constants
     {
         public static class Response
         {

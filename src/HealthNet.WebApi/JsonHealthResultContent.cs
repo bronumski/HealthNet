@@ -8,21 +8,21 @@ namespace HealthNet
 {
     public class JsonHealthResultContent : HttpContent
     {
-        private readonly MemoryStream _Stream = new MemoryStream();
+        private readonly MemoryStream writeStream = new MemoryStream();
         public JsonHealthResultContent(HealthResult value)
         {
             Headers.ContentType = new MediaTypeHeaderValue(Constants.Response.ContentType.Json) { CharSet = "utf-8" };
-            new HealthResultJsonSerializer().SerializeToStream(_Stream, value);
-            _Stream.Position = 0;
+            new HealthResultJsonSerializer().SerializeToStream(writeStream, value);
+            writeStream.Position = 0;
         }
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            return _Stream.CopyToAsync(stream);
+            return writeStream.CopyToAsync(stream);
         }
 
         protected override bool TryComputeLength(out long length)
         {
-            length = _Stream.Length;
+            length = writeStream.Length;
             return true;
         }
     }

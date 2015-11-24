@@ -5,7 +5,7 @@ namespace HealthNet
     public class VersionProvider : IVersionProvider
     {
         private readonly IHealthNetConfiguration healthNetConfiguration;
-        private static string CachedVersion;
+        private static string cachedVersion;
 
         public VersionProvider(IHealthNetConfiguration healthNetConfiguration)
         {
@@ -14,13 +14,13 @@ namespace HealthNet
 
         public string GetSystemVersion()
         {
-            if (!string.IsNullOrEmpty(CachedVersion)) return CachedVersion;
+            if (!string.IsNullOrEmpty(cachedVersion)) return cachedVersion;
 
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(healthNetConfiguration.GetType().Assembly.Location);
             
-            CachedVersion = fvi.FileVersion;
+            cachedVersion = fvi.FileVersion;
             
-            return CachedVersion;
+            return cachedVersion;
         }
     }
 }

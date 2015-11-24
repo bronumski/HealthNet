@@ -10,7 +10,7 @@ namespace HealthNet.HealthCheckServiceFixtures
 {
     class When_getting_the_status_and_a_system_check_overruns
     {
-        private HealthResult Result;
+        private HealthResult result;
 
         [TestFixtureSetUp]
         public void SetUp()
@@ -34,7 +34,7 @@ namespace HealthNet.HealthCheckServiceFixtures
             var task = Task<HealthResult>.Factory.StartNew(() => service.CheckHealth());
             if (Task.WaitAll(new Task[] {task}, TimeSpan.FromSeconds(5)))
             {
-                Result = task.Result;
+                result = task.Result;
             }
             else
             {
@@ -45,19 +45,19 @@ namespace HealthNet.HealthCheckServiceFixtures
         [Test]
         public void Overall_health_is_Serious()
         {
-            Result.Health.Should().Be(HealthState.Serious);
+            result.Health.Should().Be(HealthState.Serious);
         }
 
         [Test]
         public void Healthy_system_checker_result_is_returned()
         {
-            Result.SystemStates.Single(x => x.SystemName == "Healthy checker").Health.Should().Be(HealthState.Good);
+            result.SystemStates.Single(x => x.SystemName == "Healthy checker").Health.Should().Be(HealthState.Good);
         }
 
         [Test]
         public void Hanging_system_checker_result_is_returned()
         {
-            Result.SystemStates.Single(x => x.SystemName == "Hanging checker").Health.Should().Be(HealthState.Serious);
+            result.SystemStates.Single(x => x.SystemName == "Hanging checker").Health.Should().Be(HealthState.Serious);
         }
     }
 }
