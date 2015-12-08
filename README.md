@@ -1,6 +1,10 @@
 # HealthNet
 **.Net health check endpoint**
 
+[![Build status](https://ci.appveyor.com/api/projects/status/05xrcyeej88itj1b?svg=true)](https://ci.appveyor.com/project/bronumski/healthnet)
+[![NuGet Status](http://img.shields.io/nuget/v/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/) 
+[![NuGet Downloads](http://img.shields.io/nuget/dt/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/)
+
 HealthNet provides a simple way of exposing a health check endpoint to any .net application.
 It provides a mechanism to query your application and view the overall state and sub states of your application.
 HealthNet is modelled similarly to how we would view a health check of the human body.
@@ -219,3 +223,4 @@ Content-Type: application/json;charset=utf-8
 
 [![Build status](https://ci.appveyor.com/api/projects/status/05xrcyeej88itj1b?svg=true)](https://ci.appveyor.com/project/bronumski/healthnet)
 [![NuGet Status](http://img.shields.io/nuget/v/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/) 
+[![NuGet Downloads](http://img.shields.io/nuget/dt/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/)
