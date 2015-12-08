@@ -40,7 +40,7 @@ namespace HealthNet
                     responseHeaders["Content-Length"] = new[] { contentLength.ToString("D") };
                     writeStream.Position = 0;
 
-                    writeStream.CopyTo(responseStream);
+                    await writeStream.CopyToAsync(responseStream);
                 }
             }
             else
