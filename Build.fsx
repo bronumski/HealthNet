@@ -12,7 +12,6 @@ let testDir = srcDir + "/tests/"
 let slnPath = srcDir + "/HealthNet.sln"
 
 let versionMajorMinor = "1.1"
-let version = versionMajorMinor + ".0.0"
 
 let commitHash = Information.getCurrentSHA1("")
 
@@ -31,7 +30,7 @@ Target "Clean" (fun _ ->
 
 Target "Version" (fun _ ->
     CreateCSharpAssemblyInfo (srcDir + "/VersionInfo.cs")
-        [Attribute.Version version
+        [Attribute.Version buildVersion
          Attribute.FileVersion buildVersion
          Attribute.Metadata("githash", commitHash)]
 
