@@ -5,7 +5,11 @@ open Fake.AssemblyInfoFile
 open Fake.AssemblyInfoHelper
 open Fake.Git
 
-let testDir = "./src/tests/"
+let srcDir = "./src"
+let packagesDir = "./packages"
+let toolsDir = "./tools"
+let testDir = srcDir + "/tests/"
+let slnPath = srcDir + "/HealthNet.sln"
 
 let versionMajorMinor = "1.1"
 let version = versionMajorMinor + ".0.0"
@@ -26,7 +30,7 @@ Target "Clean" (fun _ ->
 )
 
 Target "Version" (fun _ ->
-    CreateCSharpAssemblyInfo "src/VersionInfo.cs"
+    CreateCSharpAssemblyInfo (srcDir + "/VersionInfo.cs")
         [Attribute.Version version
          Attribute.FileVersion buildVersion
          Attribute.Metadata("githash", commitHash)]
@@ -35,8 +39,16 @@ Target "Version" (fun _ ->
     | _ -> ()
 )
 
+Target "RestorePackages" (fun _ -> 
+     slnPath
+     |> RestoreMSSolutionPackages (fun p ->
+         { p with
+             OutputPath = packagesDir
+             ToolPath = (toolsDir + "/Nuget/nuget.exe")
+             Retries = 4 }))
+
 Target "Build" (fun _ ->
-    !! "src/HealthNet.sln"
+    !! slnPath
         |> MSBuildReleaseExt "" [("Configuration", "Release")] "Build"
         |> Log "AppBuild-Output: "
 )
@@ -54,7 +66,7 @@ Target "Test" (fun _ ->
 
 Target "CreatePackage" (fun _ ->
     // Copy all the package files into a package folder
-    for nuspec in !! "src/**/*.nuspec" do
+    for nuspec in !! (srcDir + "/**/*.nuspec") do
 
         let projFileName = nuspec.Replace(".nuspec", ".csproj")
         
@@ -75,6 +87,7 @@ Target "Default" (fun _ ->
 
 "Clean"
  ==> "Version"
+ ==> "RestorePackages"
  ==> "Build"
  ==> "Test"
  ==> "CreatePackage"
