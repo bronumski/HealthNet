@@ -5,6 +5,7 @@
     <version>$version$</version>
     <authors>bronumski</authors>
     <owners>bronumski</owners>
+    <iconUrl>https://github.com/bronumski/HealthNet/tree/release/$version$/src/HealthNet.Nancy/nuget-healthnet.nancy.png</iconUrl>
     <licenseUrl>https://github.com/bronumski/HealthNet/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/bronumski/HealthNet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
