@@ -1,0 +1,74 @@
+div.HealthNetDashBoard {
+    width: 100%;
+    border: solid #666699 3px;
+    background-color: #b3b3cc;
+    border-radius: 25px;
+    padding: 10px 10px 10px 10px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment{
+    width: 100%;
+    display: inline-block;
+    border: solid #666699 3px;
+    border-radius: 25px;
+    background-color: #8585ad;
+    margin:  0px 0px 10px 0px;
+    box-sizing: border-box;
+    padding: 0px 10px 10px 10px;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment:last-child{
+    margin-bottom: 0px;
+}
+div.HealthNetDashBoard h1, div.HealthNetDashBoard div {
+    font-family: Arial;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment h1 {
+    font-size: 2em;
+    text-align: center;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment div.HealthNetEndpoint {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    border-radius: 25px;
+    border: solid #666699 3px;
+    background-color: #8585ad;
+    margin: 5px;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment div.HealthNetEndpoint h1{
+    font-size: 1.5em;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment div.HealthNetChecking {
+    background-image:
+            repeating-linear-gradient(
+                    -45deg,
+                    #666699,
+                    #666699 11px,
+                    #eee 15px,
+                    #eee 20px /* determines size */
+            );
+    background-size: 28px 28px;
+    animation: checkingHealthAni .5s linear infinite;
+}
+@keyframes checkingHealthAni {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 28px 0;
+    }
+}
+
+div.HealthNetDashBoard div.HealthNetEnvironment div.Good{
+    background-color: #33cc33;
+    border-color: #009900;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment div.Serious{
+    background-color: #ffcc00;
+    border-color: #ff9900;
+}
+div.HealthNetDashBoard div.HealthNetEnvironment div.Critical{
+    background-color: #ff6666;
+    border-color: #cc0000;
+}
