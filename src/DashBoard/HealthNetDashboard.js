@@ -12,13 +12,43 @@ function HealthNetDashboard(dashboardId, env) {
     var updateEndpointHealthStatus = function(endpointElement, healthCheckResult){
         endpointElement.className = "HealthNetEndpoint " + healthCheckResult.health;
 
+        var popupId = healthCheckResult.host + "_RAW";
+        var showRawResultButton = document.createElement("a");
+        showRawResultButton.className = "HealthNetShowRaw";
+        showRawResultButton.href = "#" + popupId;
+        showRawResultButton.innerText = "{...}";
+        endpointElement.appendChild(showRawResultButton);
+
         for (var i = 0; i < healthCheckResult.systemStates.length; i++){
             var systemState = healthCheckResult.systemStates[i];
+
             var systemStateElement = document.createElement("div");
             systemStateElement.innerText = systemState.systemName;
             systemStateElement.className = systemState.health;
             endpointElement.appendChild(systemStateElement);
         }
+
+        var systemStateRawElement = document.createElement("div");
+        systemStateRawElement.id = popupId;
+        systemStateRawElement.innerText = JSON.stringify(healthCheckResult, null, '    ');
+        systemStateRawElement.className = "HealthNetResultRaw";
+
+        var rawContent = document.createElement("div");
+        rawContent.className = "HealthNetRawContent";
+        rawContent.innerText = JSON.stringify(healthCheckResult, null, '    ');
+
+        var rawPopup = document.createElement("div");
+        rawPopup.className = "HealthNetRawPopup";
+
+        var closeRawPopup = document.createElement("a");
+        closeRawPopup.className = "HealthNetCloseRaw";
+        closeRawPopup.innerText = "x";
+        closeRawPopup.href = "#";
+
+        rawPopup.appendChild(closeRawPopup);
+        rawPopup.appendChild(rawContent);
+        systemStateRawElement.appendChild(rawPopup);
+        endpointElement.parentElement.parentElement.appendChild(systemStateRawElement);
     };
 
     var setupHealthcheckCall = function(endpoint, endpointElement){

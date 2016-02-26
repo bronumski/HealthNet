@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6860781-6e61-4ddc-ac76-3f20d9119802" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DashboardExample.html" afterPath="$PROJECT_DIR$/DashboardExample.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HealthNetDashboard.css" afterPath="$PROJECT_DIR$/HealthNetDashboard.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HealthNetDashboard.js" afterPath="$PROJECT_DIR$/HealthNetDashboard.js" />
     </list>
@@ -31,27 +28,27 @@
         <entry file="file://$PROJECT_DIR$/HealthNetDashboard.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+              <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DashboardExample.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DashboardExample.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DashboardExample.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5381166">
+            <state vertical-scroll-proportion="-18.461538">
               <caret line="24" column="53" selection-start-line="24" selection-start-column="53" selection-end-line="24" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HealthNetDashboard.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HealthNetDashboard.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HealthNetDashboard.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.68609864">
+              <caret line="145" column="16" selection-start-line="145" selection-start-column="16" selection-end-line="145" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -85,11 +82,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/HealthNetDashboard.js" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/ide/ide-scripting.js" />
         <option value="$PROJECT_DIR$/db.json" />
-        <option value="$PROJECT_DIR$/HealthNetDashboard.css" />
         <option value="$PROJECT_DIR$/DashboardExample.html" />
+        <option value="$PROJECT_DIR$/HealthNetDashboard.js" />
+        <option value="$PROJECT_DIR$/HealthNetDashboard.css" />
       </list>
     </option>
   </component>
@@ -265,14 +262,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/HealthNetDashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/ide/ide-scripting.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -289,18 +278,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HealthNetDashboard.css">
+    <entry file="file://$PROJECT_DIR$/DashboardExample.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-18.461538">
+          <caret line="24" column="53" selection-start-line="24" selection-start-column="53" selection-end-line="24" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DashboardExample.html">
+    <entry file="file://$PROJECT_DIR$/HealthNetDashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5381166">
-          <caret line="24" column="53" selection-start-line="24" selection-start-column="53" selection-end-line="24" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HealthNetDashboard.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68609864">
+          <caret line="145" column="16" selection-start-line="145" selection-start-column="16" selection-end-line="145" selection-end-column="16" />
           <folding />
         </state>
       </provider>

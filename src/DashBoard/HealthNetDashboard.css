@@ -28,6 +28,7 @@ div.HealthNetEnvironment h1 {
     text-align: center;
 }
 div.HealthNetEndpoint {
+    position: relative;
     display: inline-block;
     vertical-align: top;
     width: 300px;
@@ -92,4 +93,68 @@ div.HealthNetEndpoint div.Serious {
 div.HealthNetEndpoint div.Critical {
     background-color: #cc0000;
     border-color: #b32400;
+}
+div.HealthNetDashBoard div.HealthNetResultRaw {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+div.HealthNetResultRaw div.HealthNetRawPopup{
+    margin: 70px auto;
+    padding: 20px;
+    background-color: black;
+    border: solid #666699 3px;
+    border-radius: 25px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+div.HealthNetDashBoard div.HealthNetResultRaw div.HealthNetRawContent{
+    font-family: Consolas, "Courier New";
+    color: #ffffff;
+    max-height: 30%;
+    overflow: auto;
+    border: none;
+    white-space: pre;
+    padding: 10px 10px 10px 10px;
+}
+div.HealthNetDashBoard div.HealthNetResultRaw:target {
+    visibility: visible;
+    opacity: 1;
+}
+div.HealthNetEndpoint a.HealthNetShowRaw {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    font-family: Consolas, "Courier New";
+    font-size: 0.75em;
+    color: #fff;
+    font-weight: bold;
+}
+div.HealthNetEndpoint a.HealthNetShowRaw:hover {
+    font-size: 1em;
+}
+div.HealthNetResultRaw a.HealthNetCloseRaw {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+div.HealthNetResultRaw a.HealthNetCloseRaw:hover {
+    color: orange;
 }
