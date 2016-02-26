@@ -30,7 +30,6 @@ function HealthNetDashboard(dashboardId, env) {
 
         var systemStateRawElement = document.createElement("div");
         systemStateRawElement.id = popupId;
-        systemStateRawElement.innerText = JSON.stringify(healthCheckResult, null, '    ');
         systemStateRawElement.className = "HealthNetResultRaw";
 
         var rawContent = document.createElement("div");

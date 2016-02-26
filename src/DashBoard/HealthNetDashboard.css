@@ -106,6 +106,7 @@ div.HealthNetDashBoard div.HealthNetResultRaw {
     transition: opacity 500ms;
     visibility: hidden;
     opacity: 0;
+    z-index: 9999;
 }
 div.HealthNetResultRaw div.HealthNetRawPopup{
     margin: 70px auto;
