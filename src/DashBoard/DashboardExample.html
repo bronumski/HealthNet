@@ -15,12 +15,14 @@
     var dashboard = new HealthNetDashboard("healthCheckDashboard",
             [
                 HealthNetDashboard.createEnvironment("Test", [
-                    { endpointName: "Service C", endpointUrl: "http://foo.foo" },
-                    { endpointName: "Service D", endpointUrl: "http://foo.foo" }
+                    { endpointName: "Good Service", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Serious Service", endpointUrl: "http://localhost:3000/seriousService" },
+                    { endpointName: "Critical", endpointUrl: "http://localhost:3000/criticalService" }
                 ]),
                 HealthNetDashboard.createEnvironment("Production", [
-                    { endpointName: "Service C", endpointUrl: "http://foo.foo" },
-                    { endpointName: "Service D", endpointUrl: "http://foo.foo" }
+                    { endpointName: "Good Service", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Serious Service", endpointUrl: "http://localhost:3000/seriousService" },
+                    { endpointName: "Critical Service", endpointUrl: "http://localhost:3000/criticalService" }
                 ])
             ]);
     dashboard.checkHealth();

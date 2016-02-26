@@ -1,0 +1,44 @@
+{
+  "goodService": {
+    "host": "good.host.com",
+    "health": "Good",
+    "systemStates": [
+      {
+        "systemName": "Healthy System",
+        "health" : "Good"
+      }
+    ]
+  },
+  "seriousService": {
+    "host": "serious.host.com",
+    "health": "Serious",
+    "systemStates": [
+      {
+        "systemName": "Healthy System",
+        "health" : "Good"
+      },
+      {
+        "systemName": "Serious System",
+        "health" : "Serious"
+      }
+    ]
+  },
+  "criticalService": {
+    "host": "critical.host.com",
+    "health": "Critical",
+    "systemStates": [
+      {
+        "systemName": "Healthy System",
+        "health" : "Good"
+      },
+      {
+        "systemName": "Serious System",
+        "health" : "Serious"
+      },
+      {
+        "systemName": "Critical System",
+        "health" : "Critical"
+      }
+    ]
+  }
+}

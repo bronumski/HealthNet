@@ -7,7 +7,7 @@ div.HealthNetDashBoard {
     margin: 0px;
     box-sizing: border-box;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment{
+div.HealthNetEnvironment{
     width: 100%;
     display: inline-block;
     border: solid #666699 3px;
@@ -17,29 +17,30 @@ div.HealthNetDashBoard div.HealthNetEnvironment{
     box-sizing: border-box;
     padding: 0px 10px 10px 10px;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment:last-child{
+div.HealthNetEnvironment:last-child{
     margin-bottom: 0px;
 }
 div.HealthNetDashBoard h1, div.HealthNetDashBoard div {
     font-family: Arial;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment h1 {
+div.HealthNetEnvironment h1 {
     font-size: 2em;
     text-align: center;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment div.HealthNetEndpoint {
+div.HealthNetEndpoint {
     display: inline-block;
+    vertical-align: top;
     width: 300px;
-    height: 300px;
     border-radius: 25px;
     border: solid #666699 3px;
     background-color: #8585ad;
     margin: 5px;
+    padding: 5px 10px;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment div.HealthNetEndpoint h1{
+div.HealthNetEndpoint h1{
     font-size: 1.5em;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment div.HealthNetChecking {
+div.HealthNetChecking {
     background-image:
             repeating-linear-gradient(
                     -45deg,
@@ -59,16 +60,36 @@ div.HealthNetDashBoard div.HealthNetEnvironment div.HealthNetChecking {
         background-position: 28px 0;
     }
 }
-
-div.HealthNetDashBoard div.HealthNetEnvironment div.Good{
+div.HealthNetEndpoint div{
+    border-style: solid;
+    border-radius: 25px;
+    border-width: 3px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px 15px;
+}
+div.HealthNetDashBoard div.Good{
     background-color: #33cc33;
     border-color: #009900;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment div.Serious{
+div.HealthNetDashBoard div.Serious{
     background-color: #ffcc00;
     border-color: #ff9900;
 }
-div.HealthNetDashBoard div.HealthNetEnvironment div.Critical{
+div.HealthNetDashBoard div.Critical{
     background-color: #ff6666;
     border-color: #cc0000;
+}
+div.HealthNetEndpoint div.Good {
+    background-color: #009900;
+    border-color: #006600;
+    color: #eeeeee;
+}
+div.HealthNetEndpoint div.Serious {
+    background-color: #ff9900;
+    border-color: #ff4000;
+}
+div.HealthNetEndpoint div.Critical {
+    background-color: #cc0000;
+    border-color: #b32400;
 }

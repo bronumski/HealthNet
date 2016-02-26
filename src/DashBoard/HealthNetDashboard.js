@@ -9,21 +9,29 @@ function HealthNetDashboard(dashboardId, env) {
         }
     };
 
+    var updateEndpointHealthStatus = function(endpointElement, healthCheckResult){
+        endpointElement.className = "HealthNetEndpoint " + healthCheckResult.health;
+
+        for (var i = 0; i < healthCheckResult.systemStates.length; i++){
+            var systemState = healthCheckResult.systemStates[i];
+            var systemStateElement = document.createElement("div");
+            systemStateElement.innerText = systemState.systemName;
+            systemStateElement.className = systemState.health;
+            endpointElement.appendChild(systemStateElement);
+        }
+    };
+
     var setupHealthcheckCall = function(endpoint, endpointElement){
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = (function(getHealthCheck, displayElement) {
-            return function() {
-                if (getHealthCheck.readyState == 4 && getHealthCheck.status == 200) {
-                    var healthResult = JSON.parse(getHealthCheck.responseText);
-                    displayElement.className = "HealthNetEndpoint " + healthResult.health;
-                }
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var healthResult = JSON.parse(this.responseText);
+                updateEndpointHealthStatus(endpointElement, healthResult);
             }
-        })(xmlHttp, endpointElement);
+        };
         xmlHttp.onerror = function() {
             endpointElement.className = "HealthNetEndpoint Critical";
         };
-
-
         endpointElement.performHealthCheck = function(){
             xmlHttp.open("GET", endpoint.endpointUrl, true);
             xmlHttp.send();
