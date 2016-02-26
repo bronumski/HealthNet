@@ -21,11 +21,22 @@ div.HealthNetEnvironment:last-child{
     margin-bottom: 0px;
 }
 div.HealthNetDashBoard h1, div.HealthNetDashBoard div {
+    color: #fff;
     font-family: Arial;
 }
 div.HealthNetEnvironment h1 {
     font-size: 2em;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-shadow:
+            2px 2px 5px #000,
+                /* Simulated effect for Firefox and Opera
+                   and nice enhancement for WebKit */
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
 }
 div.HealthNetEndpoint {
     position: relative;
@@ -84,7 +95,6 @@ div.HealthNetDashBoard div.Critical{
 div.HealthNetEndpoint div.Good {
     background-color: #009900;
     border-color: #006600;
-    color: #eeeeee;
 }
 div.HealthNetEndpoint div.Serious {
     background-color: #ff9900;
@@ -142,6 +152,11 @@ div.HealthNetEndpoint a.HealthNetShowRaw {
     font-size: 0.75em;
     color: #fff;
     font-weight: bold;
+    text-shadow:
+            -1px -1px 1px #000,
+            1px -1px  1px #000,
+            -1px  1px  1px #000,
+            1px  1px  1px #000;
 }
 div.HealthNetEndpoint a.HealthNetShowRaw:hover {
     font-size: 1em;
