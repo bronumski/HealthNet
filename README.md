@@ -220,6 +220,50 @@ Content-Type: application/json;charset=utf-8
 }
 ```
 
+## Dashboard
+
+In order to make full use of the health checks it pays to have a Dashboard to show the current state of your systems. You will probably want to create your own one but in the short term
+you can use the healthnet dashboard javascript and stylesheet bundled with the repo.
+
+![ACME DashBoard](https://github.com/bronumski/HealthNet/blob/master/AcmeDashboard.PNG)
+
+```
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ACME Dashboard</title>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/bronumski/HealthNet/release/1.1.0.46/src/DashBoard/HealthNetDashboard.css">
+
+<script type="application/javascript" src="https://cdn.rawgit.com/bronumski/HealthNet/release/1.1.0.46/src/DashBoard/HealthNetDashboard.js"></script>
+
+<div id="healthCheckDashboard"></div>
+
+<script type="application/javascript">
+    var dashboard = new HealthNetDashboard("healthCheckDashboard",
+            [
+                HealthNetDashboard.createEnvironment("Production", [
+                    { endpointName: "Service A", endpointUrl: "http://servera.production.com/healthcheck" },
+                    { endpointName: "Service B", endpointUrl: "http://serverb.production.com/healthcheck" },
+                    { endpointName: "Service C", endpointUrl: "http://serverc.production.com/healthcheck" }
+                ]),
+                HealthNetDashboard.createEnvironment("Staging", [
+                    { endpointName: "Service A", endpointUrl: "http://servera.staging.com/healthcheck" },
+                    { endpointName: "Service B", endpointUrl: "http://serverb.staging.com/healthcheck" },
+                    { endpointName: "Service C", endpointUrl: "http://serverc.staging.com/healthcheck" }
+                ]),
+                HealthNetDashboard.createEnvironment("Development", [
+                    { endpointName: "Service A", endpointUrl: "http://servera.development.com/healthcheck" },
+                    { endpointName: "Service B", endpointUrl: "http://serverb.development.com/healthcheck" },
+                    { endpointName: "Service C", endpointUrl: "http://serverc.development.com/healthcheck" }
+                ])
+            ]);
+    dashboard.checkHealth();
+</script>
+</body>
+</html>
+```
+
 [![Build status](https://ci.appveyor.com/api/projects/status/05xrcyeej88itj1b?svg=true)](https://ci.appveyor.com/project/bronumski/healthnet)
 [![NuGet Status](http://img.shields.io/nuget/v/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/) 
-[![NuGet Downloads](http://img.shields.io/nuget/dt/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/)
