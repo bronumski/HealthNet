@@ -227,7 +227,7 @@ you can use the healthnet dashboard javascript and stylesheet bundled with the r
 
 ![ACME DashBoard](https://github.com/bronumski/HealthNet/blob/master/AcmeDashboard.PNG)
 
-```
+```html
 <html lang="en">
 <head>
     <meta charset="UTF-8">
