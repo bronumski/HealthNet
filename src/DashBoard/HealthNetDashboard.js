@@ -19,6 +19,16 @@ function HealthNetDashboard(dashboardId, env) {
         showRawResultButton.innerText = "{...}";
         endpointElement.appendChild(showRawResultButton);
 
+        var dashboardSyle = "";
+
+        if (healthCheckResult.health == "Critical" || healthCheckResult.health == "Dead") {
+            dashboardSyle = "Critical";
+        }
+        else if (healthCheckResult.health == "Serious") {
+            dashboardSyle = healthCheckResult.health;
+        }
+        endpointElement.parentElement.className += " " + dashboardSyle;
+
         for (var i = 0; i < healthCheckResult.systemStates.length; i++){
             var systemState = healthCheckResult.systemStates[i];
 
@@ -52,7 +62,7 @@ function HealthNetDashboard(dashboardId, env) {
 
     var builErrorUnavailableResult = function(xmlHttpResponse, endpointElement) {
         var unavailableResult = {
-            health: "Unavailable",
+            health: "Dead",
             status: xmlHttpResponse.status,
             message: xmlHttpResponse.responseText,
             systemStates: [],

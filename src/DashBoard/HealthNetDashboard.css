@@ -93,6 +93,18 @@ div.HealthNetDashBoard div.Critical{
     background-color: #ff6666;
     border-color: #cc0000;
 }
+div.HealthNetDashBoard div.Dead {
+    border-color: #b32400;
+    background-image:
+            repeating-linear-gradient(
+                    -45deg,
+                    #ff6666,
+                    #ff6666 11px,
+                    #cc0000 15px,
+                    #cc0000 20px /* determines size */
+            );
+    background-size: 28px 28px;
+}
 div.HealthNetEndpoint div.Good {
     background-color: #009900;
     border-color: #006600;
@@ -104,19 +116,6 @@ div.HealthNetEndpoint div.Serious {
 div.HealthNetEndpoint div.Critical {
     background-color: #cc0000;
     border-color: #b32400;
-}
-
-div.HealthNetDashBoard div.Unavailable {
-    border-color: #b32400;
-    background-image:
-            repeating-linear-gradient(
-                    -45deg,
-                    #ff6666,
-                    #ff6666 11px,
-                    #cc0000 15px,
-                    #cc0000 20px /* determines size */
-            );
-    background-size: 28px 28px;
 }
 
 div.HealthNetDashBoard div.HealthNetResultRaw {
