@@ -5,6 +5,7 @@
 [Pp]ackages/
 [Pp]ublish/
 build/_results/
+.idea/
 *.suo
 *.user
 _ReSharper*/
