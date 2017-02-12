@@ -50,16 +50,31 @@ function HealthNetDashboard(dashboardId, env) {
         endpointElement.parentElement.parentElement.appendChild(systemStateRawElement);
     };
 
+    var builErrorUnavailableResult = function(xmlHttpResponse, endpointElement) {
+        var unavailableResult = {
+            health: "Unavailable",
+            status: xmlHttpResponse.status,
+            message: xmlHttpResponse.responseText,
+            systemStates: [],
+        };
+        updateEndpointHealthStatus(endpointElement, unavailableResult);
+    }
     var setupHealthcheckCall = function(endpoint, endpointElement){
         var xmlHttp = new XMLHttpRequest();
+        xmlHttp.timeout = 10000;
         xmlHttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var healthResult = JSON.parse(this.responseText);
-                updateEndpointHealthStatus(endpointElement, healthResult);
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var healthResult = JSON.parse(this.responseText);
+                    updateEndpointHealthStatus(endpointElement, healthResult);
+                }
+                else {
+                    builErrorUnavailableResult(this, endpointElement);
+                }
             }
         };
         xmlHttp.onerror = function() {
-            endpointElement.className = "HealthNetEndpoint Critical";
+            builErrorUnavailableResult(this, endpointElement);
         };
         endpointElement.performHealthCheck = function(){
             xmlHttp.open("GET", endpoint.endpointUrl, true);

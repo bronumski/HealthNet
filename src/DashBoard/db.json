@@ -4,7 +4,11 @@
     "health": "Good",
     "systemStates": [
       {
-        "systemName": "Healthy System",
+        "systemName": "Healthy System A",
+        "health" : "Good"
+      },
+      {
+        "systemName": "Healthy System B",
         "health" : "Good"
       }
     ]
@@ -14,12 +18,16 @@
     "health": "Serious",
     "systemStates": [
       {
-        "systemName": "Healthy System",
+        "systemName": "Healthy System A",
         "health" : "Good"
       },
       {
-        "systemName": "Serious System",
+        "systemName": "Serious System B",
         "health" : "Serious"
+      },
+      {
+        "systemName": "A long system name to force line wrap",
+        "health" : "Good"
       }
     ]
   },
@@ -28,16 +36,20 @@
     "health": "Critical",
     "systemStates": [
       {
-        "systemName": "Healthy System",
+        "systemName": "Healthy System A",
         "health" : "Good"
       },
       {
-        "systemName": "Serious System",
+        "systemName": "Serious System B",
         "health" : "Serious"
       },
       {
-        "systemName": "Critical System",
+        "systemName": "Critical System C",
         "health" : "Critical"
+      },
+      {
+        "systemName": "Healthy System D",
+        "health" : "Good"
       }
     ]
   }

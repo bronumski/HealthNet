@@ -14,15 +14,28 @@
 <script type="application/javascript">
     var dashboard = new HealthNetDashboard("healthCheckDashboard",
             [
-                HealthNetDashboard.createEnvironment("Test", [
-                    { endpointName: "Good Service", endpointUrl: "http://localhost:3000/goodService" },
-                    { endpointName: "Serious Service", endpointUrl: "http://localhost:3000/seriousService" },
-                    { endpointName: "Critical", endpointUrl: "http://localhost:3000/criticalService" }
+                HealthNetDashboard.createEnvironment("Healthy Environment", [
+                    { endpointName: "Good Service A", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Good Service B", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Long service name to force a line wrap", endpointUrl: "http://localhost:3000/goodService" }
                 ]),
-                HealthNetDashboard.createEnvironment("Production", [
-                    { endpointName: "Good Service", endpointUrl: "http://localhost:3000/goodService" },
-                    { endpointName: "Serious Service", endpointUrl: "http://localhost:3000/seriousService" },
-                    { endpointName: "Critical Service", endpointUrl: "http://localhost:3000/criticalService" }
+                HealthNetDashboard.createEnvironment("Serious Environment", [
+                    { endpointName: "Good Service A", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Serious Service B", endpointUrl: "http://localhost:3000/seriousService" },
+                    { endpointName: "Good Service C", endpointUrl: "http://localhost:3000/goodService" }
+                ]),
+                HealthNetDashboard.createEnvironment("Critical Environment", [
+                    { endpointName: "Good Service A", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Serious Service B", endpointUrl: "http://localhost:3000/seriousService" },
+                    { endpointName: "Critical Service C", endpointUrl: "http://localhost:3000/criticalService" },
+                    { endpointName: "Good Service D", endpointUrl: "http://localhost:3000/goodService" }
+                ]),
+                HealthNetDashboard.createEnvironment("Down Environment", [
+                    { endpointName: "Good Service A", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Serious Service B", endpointUrl: "http://localhost:3000/seriousService" },
+                    { endpointName: "Down Service C", endpointUrl: "http://localhost:3001/missingService" },
+                    { endpointName: "Good Service D", endpointUrl: "http://localhost:3000/goodService" },
+                    { endpointName: "Missing Service E", endpointUrl: "http://localhost:3000/missingService" }
                 ])
             ]);
     dashboard.checkHealth();
