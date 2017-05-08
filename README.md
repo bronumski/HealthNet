@@ -266,4 +266,4 @@ you can use the healthnet dashboard javascript and stylesheet bundled with the r
 ```
 
 [![Build status](https://ci.appveyor.com/api/projects/status/05xrcyeej88itj1b?svg=true)](https://ci.appveyor.com/project/bronumski/healthnet)
-[![NuGet Status](http://img.shields.io/nuget/v/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/) 
+[![NuGet Status](http://img.shields.io/nuget/v/HealthNet.Core.svg?style=flat)](https://www.nuget.org/packages/HealthNet.Core/)
