@@ -9,63 +9,63 @@ using Owin;
 
 namespace HealthNet.Integrations.Runners
 {
-    class WebApiFixturesRunner : IFixtureRunner
+  class WebApiFixturesRunner : IFixtureRunner
+  {
+    public IAppBuilder Configure(IAppBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
     {
-        public IAppBuilder Configure(IAppBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
-        {
-            var httpConfiguration = new HttpConfiguration();
-            httpConfiguration.Routes.MapHttpRoute(
-                routeTemplate: configuration.Path.Remove(0, 1),
-                name: "HealthCheck",
-                defaults: new { Controller = "HealthCheck" }
-                );
+      var httpConfiguration = new HttpConfiguration();
+      httpConfiguration.Routes.MapHttpRoute(
+          routeTemplate: configuration.Path.Remove(0, 1),
+          name: "HealthCheck",
+          defaults: new { Controller = "HealthCheck" }
+          );
 
-            var assemblyResolver = new AssembliesResolver();
-            httpConfiguration.Services.Replace(typeof(IAssembliesResolver), assemblyResolver);
+      var assemblyResolver = new AssembliesResolver();
+      httpConfiguration.Services.Replace(typeof(IAssembliesResolver), assemblyResolver);
 
-            httpConfiguration.DependencyResolver = new DependencyResolver(configuration, checkers);
+      httpConfiguration.DependencyResolver = new DependencyResolver(configuration, checkers);
 
-            return app.UseWebApi(httpConfiguration);
-        }
+      return app.UseWebApi(httpConfiguration);
+    }
+  }
+
+  class DependencyResolver : IDependencyResolver
+  {
+    private readonly IHealthNetConfiguration configuration;
+    private readonly IEnumerable<ISystemChecker> checkers;
+
+    public DependencyResolver(IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
+    {
+      this.configuration = configuration;
+      this.checkers = checkers;
     }
 
-    class DependencyResolver : IDependencyResolver
+    public void Dispose() { }
+
+    public object GetService(Type serviceType)
     {
-        private readonly IHealthNetConfiguration configuration;
-        private readonly IEnumerable<ISystemChecker> checkers;
-
-        public DependencyResolver(IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
-        {
-            this.configuration = configuration;
-            this.checkers = checkers;
-        }
-
-        public void Dispose() {}
-
-        public object GetService(Type serviceType)
-        {
-            return serviceType == typeof(HealthCheckController) ? new HealthCheckController(configuration, checkers) : null;
-        }
-
-        public IEnumerable<object> GetServices(Type serviceType)
-        {
-            return Enumerable.Empty<object>();
-        }
-
-        public IDependencyScope BeginScope()
-        {
-            return this;
-        }
+      return serviceType == typeof(HealthCheckController) ? new HealthCheckController(configuration, checkers) : null;
     }
 
-    class AssembliesResolver : DefaultAssembliesResolver
+    public IEnumerable<object> GetServices(Type serviceType)
     {
-        public override ICollection<Assembly> GetAssemblies()
-        {
-            return new[]
-            {
-                typeof(HealthCheckController).Assembly
-            };
-        }
+      return Enumerable.Empty<object>();
     }
+
+    public IDependencyScope BeginScope()
+    {
+      return this;
+    }
+  }
+
+  class AssembliesResolver : DefaultAssembliesResolver
+  {
+    public override ICollection<Assembly> GetAssemblies()
+    {
+      return new[]
+      {
+        typeof(HealthCheckController).Assembly
+      };
+    }
+  }
 }

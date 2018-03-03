@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.1.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Owin" Version="5.2.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0" />
     <PackageReference Include="Microsoft.Owin.Testing" Version="4.0.0" />
     <PackageReference Include="Nancy" Version="1.4.4" />
@@ -25,6 +26,7 @@
     <ProjectReference Include="..\..\HealthNet.Core\HealthNet.Core.csproj" />
     <ProjectReference Include="..\..\HealthNet.Nancy\HealthNet.Nancy.csproj" />
     <ProjectReference Include="..\..\HealthNet.Owin\HealthNet.Owin.csproj" />
+    <ProjectReference Include="..\..\HealthNet.WebApi\HealthNet.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
