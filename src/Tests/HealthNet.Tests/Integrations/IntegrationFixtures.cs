@@ -9,7 +9,7 @@ using Owin;
 
 namespace HealthNet.Integrations
 {
-  //[TestFixture(typeof(NancyFixturesRunner))]
+  [TestFixture(typeof(NancyFixturesRunner))]
   [TestFixture(typeof(OwinFixturesRunner))]
   //[TestFixture(typeof(WebApiFixturesRunner))]
   abstract class IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
