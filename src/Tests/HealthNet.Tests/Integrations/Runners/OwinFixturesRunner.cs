@@ -4,15 +4,15 @@ using Owin;
 
 namespace HealthNet.Integrations.Runners
 {
-    class OwinFixturesRunner : IFixtureRunner
+  class OwinFixturesRunner : IFixtureRunner
+  {
+    public IAppBuilder Configure(IAppBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
     {
-        public IAppBuilder Configure(IAppBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
-        {
-            return app.UseHealthNet(configuration, () =>
-            {
-                var systemCheckers = checkers as ISystemChecker[] ?? checkers.ToArray();
-                return systemCheckers;
-            });
-        }
+      return app.UseHealthNet(configuration, () =>
+      {
+        var systemCheckers = checkers as ISystemChecker[] ?? checkers.ToArray();
+        return systemCheckers;
+      });
     }
+  }
 }
