@@ -18,3 +18,4 @@ _TeamCity*/
 *.ReSharper/
 *.dotCover
 *.dbmdl
+TestResults.xml
