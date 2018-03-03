@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Env = System.Collections.Generic.IDictionary<string, object>;
 
-namespace HealthNet
+namespace HealthNet.Owin
 {
   using AppFunc = Func<Env, Task>;
   public class HealthNetMiddleware

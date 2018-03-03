@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
-    <RootNamespace>HealthNet</RootNamespace>
+    <RootNamespace>HealthNet.Owin</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

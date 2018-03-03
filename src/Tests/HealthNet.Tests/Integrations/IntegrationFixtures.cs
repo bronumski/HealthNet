@@ -2,29 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using HealthNet.Integrations.Runners;
-using Microsoft.Owin.Testing;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.TestHost;
 using NSubstitute;
 using NUnit.Framework;
-using Owin;
 
 namespace HealthNet.Integrations
 {
   [TestFixture(typeof(NancyFixturesRunner))]
   [TestFixture(typeof(OwinFixturesRunner))]
   [TestFixture(typeof(WebApiFixturesRunner))]
+  [TestFixture(typeof(AspNetCoreFixturesRunner))]
   abstract class IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
   {
     [OneTimeSetUp]
     public void SetUp()
     {
       IFixtureRunner runner = new TFixtureRunner();
-      using (var server = TestServer.Create(app => runner.Configure(app, GetConfiguration(), CreateCheckers()).Run(context =>
-          {
-            context.Response.ContentType = "text/plain";
-            return context.Response.WriteAsync("Hello World");
-          })))
+      using (var server = new TestServer(new WebHostBuilder()
+        .Configure(app => runner.Configure(app, GetConfiguration(), CreateCheckers()).Run(async context =>
+        {
+          context.Response.ContentType = "text/plain";
+          await context.Response.WriteAsync("Hello World");
+        }))))
       {
-        Response = server.HttpClient.GetAsync(Path).Result;
+        Response = server.CreateClient().GetAsync(Path).Result;
 
         RawContent = Response.Content.ReadAsStringAsync().Result;
       }

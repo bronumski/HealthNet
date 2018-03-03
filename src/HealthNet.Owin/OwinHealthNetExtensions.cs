@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Owin;
 
-namespace HealthNet
+namespace HealthNet.Owin
 {
   public static class OwinHealthNetExtensions
   {

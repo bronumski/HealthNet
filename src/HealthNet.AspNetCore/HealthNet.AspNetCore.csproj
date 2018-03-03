@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>HealthNet</RootNamespace>
+    <RootNamespace>HealthNet.AspNetCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

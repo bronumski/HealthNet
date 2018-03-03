@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Owin;
+using Microsoft.AspNetCore.Builder;
 
 namespace HealthNet.Integrations.Runners
 {
   internal interface IFixtureRunner
   {
-    IAppBuilder Configure(IAppBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers);
+    IApplicationBuilder Configure(IApplicationBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers);
   }
 }
