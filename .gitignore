@@ -5,6 +5,8 @@
 [Pp]ackages/
 [Pp]ublish/
 build/_results/
+.vs/
+.vscode/
 .idea/
 *.suo
 *.user

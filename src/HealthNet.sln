@@ -1,19 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3E186A20-97A6-4E91-99E7-6130503FE336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNet.Tests", "Tests\HealthNet.Tests\HealthNet.Tests.csproj", "{FF3C6FC5-C539-4E5D-97C7-A4157FB163C9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNet.Core", "HealthNet.Core\HealthNet.Core.csproj", "{7137651C-D857-4373-8691-4A856EFCC858}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNet.Owin", "HealthNet.Owin\HealthNet.Owin.csproj", "{850F6E09-4C85-4A1B-974D-4B1ECE29DD37}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNet.Nancy", "HealthNet.Nancy\HealthNet.Nancy.csproj", "{90F62CDB-6990-465B-93CA-49F81F658F52}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A7F39964-61AA-4E36-BEBA-B554BD7E2B08}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{A7F39964-61AA-4E36-BEBA-B554BD7E2B08}"
 	ProjectSection(SolutionItems) = preProject
 		..\appveyor.yml = ..\appveyor.yml
 		..\Build.bat = ..\Build.bat
@@ -25,7 +17,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A7F39964
 		VersionInfo.cs = VersionInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthNet.WebApi", "HealthNet.WebApi\HealthNet.WebApi.csproj", "{F45502DC-438F-44FA-A14D-C7B48F74A138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthNet.Core", "HealthNet.Core\HealthNet.Core.csproj", "{997334DA-59FD-4FD1-A9E9-EF4A5E151CBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".project", ".project", "{C75256FC-A368-4EB4-9FED-688AA7220A26}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		nuget-healthnet.png = nuget-healthnet.png
+		nuget.config = nuget.config
+		ProductInfo.cs = ProductInfo.cs
+		..\README.md = ..\README.md
+		VersionInfo.cs = VersionInfo.cs
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthNet.Tests", "Tests\HealthNet.Tests\HealthNet.Tests.csproj", "{2E3BA1A6-0ACD-4382-A289-8F7C0F9552F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,31 +39,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF3C6FC5-C539-4E5D-97C7-A4157FB163C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF3C6FC5-C539-4E5D-97C7-A4157FB163C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF3C6FC5-C539-4E5D-97C7-A4157FB163C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF3C6FC5-C539-4E5D-97C7-A4157FB163C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7137651C-D857-4373-8691-4A856EFCC858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7137651C-D857-4373-8691-4A856EFCC858}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7137651C-D857-4373-8691-4A856EFCC858}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7137651C-D857-4373-8691-4A856EFCC858}.Release|Any CPU.Build.0 = Release|Any CPU
-		{850F6E09-4C85-4A1B-974D-4B1ECE29DD37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{850F6E09-4C85-4A1B-974D-4B1ECE29DD37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{850F6E09-4C85-4A1B-974D-4B1ECE29DD37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{850F6E09-4C85-4A1B-974D-4B1ECE29DD37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90F62CDB-6990-465B-93CA-49F81F658F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90F62CDB-6990-465B-93CA-49F81F658F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90F62CDB-6990-465B-93CA-49F81F658F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90F62CDB-6990-465B-93CA-49F81F658F52}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F45502DC-438F-44FA-A14D-C7B48F74A138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{997334DA-59FD-4FD1-A9E9-EF4A5E151CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{997334DA-59FD-4FD1-A9E9-EF4A5E151CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{997334DA-59FD-4FD1-A9E9-EF4A5E151CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{997334DA-59FD-4FD1-A9E9-EF4A5E151CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E3BA1A6-0ACD-4382-A289-8F7C0F9552F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E3BA1A6-0ACD-4382-A289-8F7C0F9552F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E3BA1A6-0ACD-4382-A289-8F7C0F9552F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E3BA1A6-0ACD-4382-A289-8F7C0F9552F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FF3C6FC5-C539-4E5D-97C7-A4157FB163C9} = {3E186A20-97A6-4E91-99E7-6130503FE336}
+		{2E3BA1A6-0ACD-4382-A289-8F7C0F9552F6} = {3E186A20-97A6-4E91-99E7-6130503FE336}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34CA8A17-9136-4562-8B74-FC2622F8DA31}
 	EndGlobalSection
 EndGlobal
