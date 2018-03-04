@@ -11,26 +11,25 @@ namespace HealthNet.AspNetCore
   {
     private readonly RequestDelegate next;
     private readonly IHealthNetConfiguration configuration;
-    private readonly Func<IEnumerable<ISystemChecker>> systemCheckerResolverFactory;
 
-    public HealthNetMiddleware(RequestDelegate next, IHealthNetConfiguration configuration, Func<IEnumerable<ISystemChecker>> systemCheckerResolverFactory)
+    public HealthNetMiddleware(RequestDelegate next, IHealthNetConfiguration configuration)
     {
       this.next = next;
       this.configuration = configuration;
-      this.systemCheckerResolverFactory = systemCheckerResolverFactory;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, IEnumerable<ISystemChecker> systemCheckers)
     {
       if (IsCallToHealthCheck(context))
       {
-        var responseHeaders = context.Request.Headers;
+        var responseHeaders = context.Response.Headers;
         responseHeaders["Content-Type"] = new[] { $"{Constants.Response.ContentType.Json}; charset=utf-8" };
 
         var responseStream = context.Response.Body;
 
-        var healthCheckService = new HealthCheckService(configuration, new VersionProvider(configuration),
-            systemCheckerResolverFactory());
+        var healthCheckService =
+          new HealthCheckService(configuration, new VersionProvider(configuration), systemCheckers);
+
         var result = healthCheckService.CheckHealth(IsIntrusive(context));
 
         using (var writeStream = new MemoryStream())

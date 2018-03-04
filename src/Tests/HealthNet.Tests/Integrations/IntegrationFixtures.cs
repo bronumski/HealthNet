@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -22,6 +24,11 @@ namespace HealthNet.Integrations
     {
       IFixtureRunner runner = new TFixtureRunner();
       using (var server = new TestServer(new WebHostBuilder()
+        .ConfigureServices(services =>
+        {
+          services.AddTransient(x => GetConfiguration());
+          services.AddTransient<IEnumerable<ISystemChecker>>(x => CreateCheckers());
+        })
         .Configure(app => runner.Configure(app, GetConfiguration(), CreateCheckers()).Run(async context =>
         {
           context.Response.ContentType = "text/plain";
@@ -32,7 +39,6 @@ namespace HealthNet.Integrations
 
         RawContent = Response.Content.ReadAsStringAsync().Result;
       }
-
       Console.WriteLine(RawContent);
     }
 

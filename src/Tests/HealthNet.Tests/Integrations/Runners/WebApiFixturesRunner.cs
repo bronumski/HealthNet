@@ -6,9 +6,12 @@ using System.Web.Http.Dispatcher;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Owin.Builder;
 using Owin;
+using Env = System.Collections.Generic.IDictionary<string, object>;
 
 namespace HealthNet.Integrations.Runners
 {
+  using AppFunc = Func<Env, Task>;
+
   class WebApiFixturesRunner : IFixtureRunner
   {
     public IApplicationBuilder Configure(IApplicationBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
@@ -27,9 +30,15 @@ namespace HealthNet.Integrations.Runners
 
       return app.UseOwin(setup => setup(next =>
       {
-        var owinAppBuilder = new AppBuilder();
-        owinAppBuilder.UseWebApi(httpConfiguration);
-        return owinAppBuilder.Build<Func<IDictionary<string, object>, Task>>();
+        var builder = new AppBuilder();
+        builder.UseWebApi(httpConfiguration);
+        builder.Run(async context =>
+        {
+          context.Response.ContentType = "text/plain";
+          await context.Response.WriteAsync("Hello World");
+        });
+
+        return builder.Build<AppFunc>();
       }));
     }
   }
