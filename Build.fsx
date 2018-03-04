@@ -11,14 +11,14 @@ let toolsDir = "./tools"
 let testDir = srcDir + "/tests/"
 let slnPath = srcDir + "/HealthNet.sln"
 
-let versionMajorMinor = "1.1"
+let versionMajorMinor = "1.2"
 
 let commitHash = Information.getCurrentSHA1("")
 
 let versionMacroBuild = 
     match buildServer with
-    | AppVeyor -> ("0." + appVeyorBuildVersion.Replace("1.1.0.", ""))
-    | _ -> "0.0"
+    | AppVeyor -> ("0." + appVeyorBuildVersion.Replace("1.1.", ""))
+    | _ -> "0"
 
 let buildVersion = versionMajorMinor + "." + versionMacroBuild
 
