@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -11,14 +9,16 @@ namespace HealthNet.AspNetCore
   {
     private readonly RequestDelegate next;
     private readonly IHealthNetConfiguration configuration;
+    private readonly HealthResultJsonSerializer serializer;
 
     public HealthNetMiddleware(RequestDelegate next, IHealthNetConfiguration configuration)
     {
       this.next = next;
       this.configuration = configuration;
+      serializer = new HealthResultJsonSerializer();
     }
 
-    public async Task InvokeAsync(HttpContext context, IEnumerable<ISystemChecker> systemCheckers)
+    public async Task InvokeAsync(HttpContext context, HealthCheckService healthCheckService)
     {
       if (IsCallToHealthCheck(context))
       {
@@ -27,14 +27,11 @@ namespace HealthNet.AspNetCore
 
         var responseStream = context.Response.Body;
 
-        var healthCheckService =
-          new HealthCheckService(configuration, new VersionProvider(configuration), systemCheckers);
-
         var result = healthCheckService.CheckHealth(IsIntrusive(context));
 
         using (var writeStream = new MemoryStream())
         {
-          var contentLength = new HealthResultJsonSerializer().SerializeToStream(writeStream, result);
+          var contentLength = serializer.SerializeToStream(writeStream, result);
           responseHeaders["Content-Length"] = new[] { contentLength.ToString("D") };
           writeStream.Position = 0;
 

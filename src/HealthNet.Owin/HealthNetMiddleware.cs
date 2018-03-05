@@ -12,12 +12,17 @@ namespace HealthNet.Owin
   {
     private readonly AppFunc next;
     private readonly IHealthNetConfiguration configuration;
+    private readonly IVersionProvider versionProvider;
     private readonly Func<IEnumerable<ISystemChecker>> systemCheckerResolverFactory;
 
-    public HealthNetMiddleware(AppFunc next, IHealthNetConfiguration configuration, Func<IEnumerable<ISystemChecker>> systemCheckerResolverFactory)
+    public HealthNetMiddleware(AppFunc next,
+      IHealthNetConfiguration configuration,
+      IVersionProvider versionProvider,
+      Func<IEnumerable<ISystemChecker>> systemCheckerResolverFactory)
     {
       this.next = next;
       this.configuration = configuration;
+      this.versionProvider = versionProvider;
       this.systemCheckerResolverFactory = systemCheckerResolverFactory;
     }
 
@@ -30,8 +35,9 @@ namespace HealthNet.Owin
 
         var responseStream = (Stream)environment["owin.ResponseBody"];
 
-        var healthCheckService = new HealthCheckService(configuration, new VersionProvider(configuration),
-            systemCheckerResolverFactory());
+        var healthCheckService = new HealthCheckService(configuration,
+          versionProvider ?? new VersionProvider(configuration),
+          systemCheckerResolverFactory());
         var result = healthCheckService.CheckHealth(IsIntrusive(environment));
 
         using (var writeStream = new MemoryStream())

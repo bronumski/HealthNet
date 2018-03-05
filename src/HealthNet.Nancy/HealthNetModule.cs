@@ -7,12 +7,22 @@ namespace HealthNet.Nancy
 {
   public class HealthNetModule : NancyModule
   {
-    public HealthNetModule(IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> systemCheckers)
+    public HealthNetModule(
+      IHealthNetConfiguration configuration,
+      IEnumerable<ISystemChecker> systemCheckers)
+      : this(configuration, new VersionProvider(configuration), systemCheckers)
+    {
+
+    }
+    public HealthNetModule(
+      IHealthNetConfiguration configuration,
+      IVersionProvider versionProvider,
+      IEnumerable<ISystemChecker> systemCheckers)
         : base(configuration.Path)
     {
       Get[""] = p =>
       {
-        var healthChecker = new HealthCheckService(configuration, new VersionProvider(configuration), systemCheckers);
+        var healthChecker = new HealthCheckService(configuration, versionProvider, systemCheckers);
 
         var intrusive = false;
         if (Request.Query.intrusive != null)

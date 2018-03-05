@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin.Builder;
 using Owin;
 using Env = System.Collections.Generic.IDictionary<string, object>;
@@ -14,8 +15,9 @@ namespace HealthNet.Integrations.Runners
 
   class WebApiFixturesRunner : IFixtureRunner
   {
-    public IApplicationBuilder Configure(IApplicationBuilder app, IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
+    public IApplicationBuilder Configure(IApplicationBuilder app)
     {
+      var configuration = app.ApplicationServices.GetService<IHealthNetConfiguration>();
       var httpConfiguration = new HttpConfiguration();
       httpConfiguration.Routes.MapHttpRoute(
           routeTemplate: configuration.Path.Remove(0, 1),
@@ -26,7 +28,11 @@ namespace HealthNet.Integrations.Runners
       var assemblyResolver = new AssembliesResolver();
       httpConfiguration.Services.Replace(typeof(IAssembliesResolver), assemblyResolver);
 
-      httpConfiguration.DependencyResolver = new DependencyResolver(configuration, checkers);
+      var versionProvider = app.ApplicationServices.GetService<IVersionProvider>();
+      httpConfiguration.DependencyResolver = new DependencyResolver(
+        configuration,
+        versionProvider,
+        app.ApplicationServices.GetService<IEnumerable<ISystemChecker>>());
 
       return app.UseOwin(setup => setup(next =>
       {

@@ -8,11 +8,14 @@ namespace HealthNet.Integrations.Runners
   class DependencyResolver : IDependencyResolver
   {
     private readonly IHealthNetConfiguration configuration;
+    private readonly IVersionProvider versionProvider;
     private readonly IEnumerable<ISystemChecker> checkers;
 
-    public DependencyResolver(IHealthNetConfiguration configuration, IEnumerable<ISystemChecker> checkers)
+    public DependencyResolver(IHealthNetConfiguration configuration,
+      IVersionProvider versionProvider, IEnumerable<ISystemChecker> checkers)
     {
       this.configuration = configuration;
+      this.versionProvider = versionProvider;
       this.checkers = checkers;
     }
 
@@ -20,7 +23,10 @@ namespace HealthNet.Integrations.Runners
 
     public object GetService(Type serviceType)
     {
-      return serviceType == typeof(HealthCheckController) ? new HealthCheckController(configuration, checkers) : null;
+      var healthCheckController = versionProvider == null
+        ? new HealthCheckController(configuration, checkers)
+        : new HealthCheckController(configuration, versionProvider, checkers);
+      return serviceType == typeof(HealthCheckController) ? healthCheckController : null;
     }
 
     public IEnumerable<object> GetServices(Type serviceType)

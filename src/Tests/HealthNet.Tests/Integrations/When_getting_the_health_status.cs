@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Net;
 using FluentAssertions;
 using HealthNet.Integrations.Runners;
 using NSubstitute;
@@ -7,7 +6,8 @@ using NUnit.Framework;
 
 namespace HealthNet.Integrations
 {
-  class When_getting_the_health_status<TFixtureRunner> : HealthCheckResponseFixturesBase<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
+  class When_getting_the_health_status<TFixtureRunner>
+    : HealthCheckResponseFixturesBase<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
   {
     private ISystemChecker intrusiveSystemChecker;
 
@@ -20,12 +20,6 @@ namespace HealthNet.Integrations
 
       yield return systemChecker;
       yield return intrusiveSystemChecker;
-    }
-
-    [Test]
-    public void Should_return_status_Ok()
-    {
-      Response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 
     [Test]

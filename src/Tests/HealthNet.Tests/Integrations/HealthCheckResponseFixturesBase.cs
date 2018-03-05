@@ -1,10 +1,12 @@
+using System.Net;
 using FluentAssertions;
 using HealthNet.Integrations.Runners;
 using NUnit.Framework;
 
 namespace HealthNet.Integrations
 {
-  abstract class HealthCheckResponseFixturesBase<TFixtureRunner> : IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
+  abstract class HealthCheckResponseFixturesBase<TFixtureRunner>
+    : IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
   {
     [Test]
     public void Should_have_json_content()
@@ -17,6 +19,12 @@ namespace HealthNet.Integrations
     public void Should_return_health_check_result()
     {
       RawContent.Should().Contain("\"health\":");
+    }
+
+    [Test]
+    public void Should_return_status_of_OK()
+    {
+      Response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
   }
 }
