@@ -8,6 +8,7 @@ build/_results/
 .vs/
 .vscode/
 .idea/
+.fake/
 *.suo
 *.user
 _ReSharper*/
