@@ -41,15 +41,13 @@ Target "Build" (fun _ ->
 )
 
 Target "Test" (fun _ ->
-  DotNetCli.RunCommand (fun p ->
-    { p with
-      
-        Name = "add" })
-
   DotNetCli.Test (fun p ->
     { p with
         Configuration = "Release"
-        Project = "src\\Tests\\HealthNet.Tests" })
+        Project = "src\\Tests\\HealthNet.Tests"
+        AdditionalArgs = [ "--no-build"
+                           "--no-restore"
+                           "--test-adapter-path:. --logger:nunit" ]})
 )
 
 Target "CreatePackage" (fun _ ->
