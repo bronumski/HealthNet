@@ -178,7 +178,7 @@ Content-Type: application/json;charset=utf-8
             "timeTaken": "00:00:00.5014515"
         },
         {
-            "health": "Undetermind",
+            "health": "Undetermined",
             "isVital": true,
             "message": "Intrusive check skipped",
             "systemName": "Intrusive Health Check",
