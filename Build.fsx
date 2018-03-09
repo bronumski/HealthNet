@@ -41,12 +41,15 @@ Target "Build" (fun _ ->
 )
 
 Target "Test" (fun _ ->
+  DotNetCli.RunCommand (fun p ->
+    { p with
+      
+        Name = "add" })
+
   DotNetCli.Test (fun p ->
     { p with
         Configuration = "Release"
-        Project = "src\\Tests\\HealthNet.Tests"
-        AdditionalArgs = [ "--no-build"
-                           "--no-restore" ] })
+        Project = "src\\Tests\\HealthNet.Tests" })
 )
 
 Target "CreatePackage" (fun _ ->
@@ -61,7 +64,7 @@ Target "CreatePackage" (fun _ ->
         AdditionalArgs = [ "--no-build"
                            "--no-restore"
                            "/p:Authors=bronumski"
-                           "/p:PackageIconUrl=https://raw.githubusercontent.com/bronumski/HealthNet/release" + buildVersion + "/src/" + projectName + "/icon.png"
+                           "/p:PackageIconUrl=https://raw.githubusercontent.com/bronumski/HealthNet/release/" + buildVersion + "/src/" + projectName + "/icon.png"
                            "/p:PackageProjectUrl=https://github.com/bronumski/HealthNet"
                            "/p:PackageLicenseUrl=https://raw.githubusercontent.com/bronumski/HealthNet/release/" + buildVersion + "/LICENSE"
                            "/p:RepositoryUrl=git@github.com:bronumski/HealthNet.git"
