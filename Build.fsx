@@ -46,8 +46,7 @@ Target "Test" (fun _ ->
         Configuration = "Release"
         Project = "src\\Tests\\HealthNet.Tests"
         AdditionalArgs = [ "--no-build"
-                           "--no-restore"
-                           "--test-adapter-path:. --logger:nunit" ]})
+                           "--no-restore" ]})
 )
 
 Target "CreatePackage" (fun _ ->
@@ -59,6 +58,7 @@ Target "CreatePackage" (fun _ ->
         Configuration = "Release"
         Project = projFile
         OutputPath = "../../bin"
+        VersionSuffix = "dotnet-core-beta"
         AdditionalArgs = [ "--no-build"
                            "--no-restore"
                            "/p:Authors=bronumski"
@@ -68,7 +68,7 @@ Target "CreatePackage" (fun _ ->
                            "/p:RepositoryUrl=git@github.com:bronumski/HealthNet.git"
                            "/p:Description=HealthNet"
                            "/p:Copyright=\"Copyright HealthNet " + System.DateTime.Now.Year.ToString() + "\""
-                           "/p:PackageVersion=" + buildVersion ] })
+                           "/p:VersionPrefix=" + buildVersion ] })
 )
 
 Target "Default" (fun _ ->
