@@ -86,8 +86,10 @@ public class CustmHealthCheckConfiguration : HealthNetConfiguration {}
 ### AspNet Core
 
 * Install the latest [`HealthNet.Owin`](https://www.nuget.org/packages/HealthNet.AspNetCore/) package.
+
 `dotnet add package HealthNet.AspNetCore`
 `Install-Package HealthNet.AspNetCore`
+
 * Create a custom `HealthNetConfiguration` class
 
 ```csharp
@@ -113,8 +115,10 @@ public class Startup
 ### Owin
 
 * Install the latest [`HealthNet.Owin`](https://www.nuget.org/packages/HealthNet.Owin/) package.
+
 `dotnet add package HealthNet.Owin`
 `Install-Package HealthNet.Owin`
+
 * Create a custom `HealthNetConfiguration` class
 * Provide a function to the middleware to resolve an enumeration of `ISystemChecker`
 
@@ -132,8 +136,10 @@ public void Configuration(IAppBuilder app)
 ### WebApi 2
 
 * Install the latest [`HealthNet.WebApi`](https://www.nuget.org/packages/HealthNet.WebApi/) package.
+
 `dotnet add package HealthNet.WebApi`
 `Install-Package HealthNet.WebApi`
+
 * Create a custom `HealthNetConfiguration` class
 * Add the custom `HealthNetConfiguration` class and any implementation of `ISystemChecker` to your IoC of choice
 
@@ -159,8 +165,10 @@ protected void Application_Start()
 ### NancyFx
 
 * Install the latest [`HealthNet.Nancy`](https://www.nuget.org/packages/HealthNet.Nancy/) package.
+
 `dotnet add package HealthNet.Nancy`
 `Install-Package HealthNet.Nancy`
+
 * Create a custom `HealthNetConfiguration` class
 * Add the custom `HealthNetConfiguration` class and any implementation of `ISystemChecker` to your IoC of choice
 
