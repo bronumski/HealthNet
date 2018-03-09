@@ -88,6 +88,7 @@ public class CustmHealthCheckConfiguration : HealthNetConfiguration {}
 * Install the latest [`HealthNet.Owin`](https://www.nuget.org/packages/HealthNet.AspNetCore/) package.
 
 `dotnet add package HealthNet.AspNetCore`
+
 `Install-Package HealthNet.AspNetCore`
 
 * Create a custom `HealthNetConfiguration` class
@@ -117,6 +118,7 @@ public class Startup
 * Install the latest [`HealthNet.Owin`](https://www.nuget.org/packages/HealthNet.Owin/) package.
 
 `dotnet add package HealthNet.Owin`
+
 `Install-Package HealthNet.Owin`
 
 * Create a custom `HealthNetConfiguration` class
@@ -138,6 +140,7 @@ public void Configuration(IAppBuilder app)
 * Install the latest [`HealthNet.WebApi`](https://www.nuget.org/packages/HealthNet.WebApi/) package.
 
 `dotnet add package HealthNet.WebApi`
+
 `Install-Package HealthNet.WebApi`
 
 * Create a custom `HealthNetConfiguration` class
@@ -167,6 +170,7 @@ protected void Application_Start()
 * Install the latest [`HealthNet.Nancy`](https://www.nuget.org/packages/HealthNet.Nancy/) package.
 
 `dotnet add package HealthNet.Nancy`
+
 `Install-Package HealthNet.Nancy`
 
 * Create a custom `HealthNetConfiguration` class
