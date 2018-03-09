@@ -8,13 +8,13 @@ let srcDir = "./src"
 let versionMajorMinor = "1.2"
 
 let commitHash = Information.getCurrentSHA1("")
-
-let versionMacroBuild = 
+  
+let versionBuild = 
   match buildServer with
-  | AppVeyor -> ("0." + appVeyorBuildVersion.Replace("1.2.", ""))
+  | AppVeyor -> ( appVeyorBuildVersion.Replace("1.2.", ""))
   | _ -> "0"
 
-let buildVersion = versionMajorMinor + "." + versionMacroBuild
+let buildVersion = versionMajorMinor + "." + versionBuild
 
 Target "Version" (fun _ ->
   CreateCSharpAssemblyInfo (srcDir @@ "VersionInfo.cs")
@@ -45,7 +45,8 @@ Target "Test" (fun _ ->
     { p with
         Configuration = "Release"
         Project = "src\\Tests\\HealthNet.Tests"
-        AdditionalArgs = [ "--no-build" ] })
+        AdditionalArgs = [ "--no-build"
+                           "--no-restore" ] })
 )
 
 Target "CreatePackage" (fun _ ->
