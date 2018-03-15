@@ -7,7 +7,7 @@ namespace HealthNet.Integrations.Runners
   {
     public IApplicationBuilder Configure(IApplicationBuilder app)
     {
-      return app.UseHealthNetMiddleware();
+      return app.UseHealthNet();
     }
   }
 }

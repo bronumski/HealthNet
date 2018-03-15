@@ -1,20 +1,44 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthNet.AspNetCore
 {
   public static class HealthNetMiddlewareExtensions
   {
-    public static IApplicationBuilder UseHealthNetMiddleware(this IApplicationBuilder builder)
+    private static readonly Type VersionProviderType = typeof(IVersionProvider);
+    private static readonly Type SystemCheckerType = typeof(ISystemChecker);
+    public static IApplicationBuilder UseHealthNet(this IApplicationBuilder builder)
     {
       return builder.UseMiddleware<HealthNetMiddleware>();
     }
 
-    public static IServiceCollection AddHealthNet(this IServiceCollection service, IHealthNetConfiguration config)
+    public static IServiceCollection AddHealthNet(this IServiceCollection service)
     {
-      service.AddTransient(x => config);
-      service.AddSingleton<IVersionProvider, VersionProvider>();
       return service.AddTransient<HealthCheckService>();
+    }
+
+    public static IServiceCollection AddHealthNet<THealthNetConfig>(this IServiceCollection service) where THealthNetConfig : class, IHealthNetConfiguration
+    {
+      var assembyTypes = typeof(THealthNetConfig).Assembly.GetTypes();
+
+      service.AddSingleton<IHealthNetConfiguration, THealthNetConfig>();
+
+      var versionProvider = assembyTypes
+        .FirstOrDefault(x => x.IsClass && !x.IsAbstract && VersionProviderType.IsAssignableFrom(x));
+
+      service.AddSingleton(VersionProviderType, versionProvider ?? typeof(AssemblyFileVersionProvider));
+
+      var systemCheckers = assembyTypes
+        .Where(x => x.IsClass && !x.IsAbstract && SystemCheckerType.IsAssignableFrom(x));
+
+      foreach (var checkerType in systemCheckers)
+      {
+        service.AddTransient(SystemCheckerType, checkerType);
+      }
+
+      return service.AddHealthNet();
     }
   }
 }

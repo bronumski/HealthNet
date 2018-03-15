@@ -32,7 +32,7 @@ Target "Build" (fun _ ->
     { p with
         WorkingDir = srcDir
         Configuration = "Release"
-        AdditionalArgs = ["/p:Version=" + versionMajorMinor + ".0"
+        AdditionalArgs = ["/p:Version=" + buildVersion
                           "/p:FileVersion=" + buildVersion
                           "/p:InformationalVersion=" + versionMajorMinor
                           "/p:Product=HealthNet"

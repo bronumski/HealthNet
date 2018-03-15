@@ -13,7 +13,7 @@ namespace HealthNet
     public HealthCheckController(
       IHealthNetConfiguration configuration,
       IEnumerable<ISystemChecker> checkers)
-    : this(configuration, new VersionProvider(configuration), checkers)
+    : this(configuration, new AssemblyFileVersionProvider(configuration), checkers)
     {
 
     }

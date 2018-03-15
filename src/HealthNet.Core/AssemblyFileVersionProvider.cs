@@ -2,12 +2,12 @@ using System.Diagnostics;
 
 namespace HealthNet
 {
-  public class VersionProvider : IVersionProvider
+  public class AssemblyFileVersionProvider : IVersionProvider
   {
     private readonly IHealthNetConfiguration healthNetConfiguration;
     private static string cachedVersion;
 
-    public VersionProvider(IHealthNetConfiguration healthNetConfiguration)
+    public AssemblyFileVersionProvider(IHealthNetConfiguration healthNetConfiguration)
     {
       this.healthNetConfiguration = healthNetConfiguration;
     }

@@ -50,7 +50,7 @@ namespace HealthNet.HealthCheckServiceFixtures
     {
       Result.TimeTaken
         .Should().BeGreaterThan(TimeSpan.FromSeconds(0))
-        .And.BeLessThan(TimeSpan.FromMilliseconds(500));
+        .And.BeLessThan(TimeSpan.FromSeconds(5));
     }
 
     [Test]
@@ -59,7 +59,7 @@ namespace HealthNet.HealthCheckServiceFixtures
       foreach (var systemCheckResult in Result.SystemStates)
       {
         systemCheckResult.TimeTaken.Should().BeGreaterThan(TimeSpan.FromSeconds(0))
-          .And.BeLessThan(TimeSpan.FromMilliseconds(500));
+          .And.BeLessThan(TimeSpan.FromSeconds(5));
       }
     }
 

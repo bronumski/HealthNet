@@ -20,6 +20,7 @@
     <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="NUnit" Version="3.9.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
+    <PackageReference Include="NunitXml.TestLogger" Version="1.1.0" />
     <PackageReference Include="Owin" Version="1.0.0" />
   </ItemGroup>
 

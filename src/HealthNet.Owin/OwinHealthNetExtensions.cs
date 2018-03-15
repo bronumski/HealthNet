@@ -11,7 +11,7 @@ namespace HealthNet.Owin
       IHealthNetConfiguration configuration,
       Func<IEnumerable<ISystemChecker>> systemCheckerResolver)
     {
-      return appBuilder.UseHealthNet(configuration, new VersionProvider(configuration), systemCheckerResolver);
+      return appBuilder.UseHealthNet(configuration, new AssemblyFileVersionProvider(configuration), systemCheckerResolver);
     }
 
     public static IAppBuilder UseHealthNet(

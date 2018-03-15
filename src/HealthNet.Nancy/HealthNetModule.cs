@@ -10,7 +10,7 @@ namespace HealthNet.Nancy
     public HealthNetModule(
       IHealthNetConfiguration configuration,
       IEnumerable<ISystemChecker> systemCheckers)
-      : this(configuration, new VersionProvider(configuration), systemCheckers)
+      : this(configuration, new AssemblyFileVersionProvider(configuration), systemCheckers)
     {
 
     }

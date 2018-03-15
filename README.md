@@ -36,14 +36,14 @@ public class TestSystemChecker : ISystemChecker
     return this.CreateGoodResult();
   }
 
-  //Tells the health check service that this checker is intrusive and should be skipped
-  //unless doing a thorough exam
+  // Tells the health check service that this checker is intrusive and should be skipped
+  // unless doing a thorough exam
   public bool IsIntrusive { get { return false; } }
   
-  //The Name to be returned in the health check result
+  // The Name to be returned in the health check result
   public string SystemName { get { return "Test Checker"; } }
   
-  //Provides information in the health check as to whether this is a vital system or not
+  // Provides information in the health check as to whether this is a vital system or not
   public bool IsVital { get { return true; } }
 }
 ```
@@ -81,6 +81,12 @@ public class CustomHealthCheckConfiguration : IHealthNetConfiguration
 public class CustmHealthCheckConfiguration : HealthNetConfiguration {}
 ```
 
+## Version Provider
+
+By default the service will use the `AssemblyFileVersionProvider` which pulls the file version of the assembly containing the configuration class.
+
+If needed a custom implementation of `IVersionProvider` can be supplied instead. 
+
 ## Wiring it up
 
 ### AspNet Core
@@ -99,15 +105,22 @@ public class Startup
   public void ConfigureServices(IServiceCollection services)
   {
     ...
-    services.AddHealthNet(new AuthHealthCheckConfiguration());
+    // Automatic wire up of all implementations of ISystemChecker in assembly containing config
+    services.AddHealthNet<CustomHealthCheckConfiguration>();
+    // If assembly contains an implementation of IVersionProvider that will be used instead of
+    // the built in AssemblyFileVersionProvider
+
+    // Manual wire up
+    services.AddTransient<IHealthNetConfiguration, CustomHealthCheckConfiguration>();
     services.AddTransient<ISystemChecker, FooSystemChecker>();
+    services.AddHealthNet();
     ...
   }
 
   public void Configure(IApplicationBuilder app)
   {
     ...
-    app.UseHealthNetMiddleware(); //Expect rename to app.UseHealthNet();
+    app.UseHealthNet();
     ...
   }
 }
@@ -286,25 +299,25 @@ you can use the healthnet dashboard javascript and stylesheet bundled with the r
 <div id="healthCheckDashboard"></div>
 
 <script type="application/javascript">
-    var dashboard = new HealthNetDashboard("healthCheckDashboard",
-            [
-                HealthNetDashboard.createEnvironment("Production", [
-                    { endpointName: "Service A", endpointUrl: "http://servera.production.com/healthcheck" },
-                    { endpointName: "Service B", endpointUrl: "http://serverb.production.com/healthcheck" },
-                    { endpointName: "Service C", endpointUrl: "http://serverc.production.com/healthcheck" }
-                ]),
-                HealthNetDashboard.createEnvironment("Staging", [
-                    { endpointName: "Service A", endpointUrl: "http://servera.staging.com/healthcheck" },
-                    { endpointName: "Service B", endpointUrl: "http://serverb.staging.com/healthcheck" },
-                    { endpointName: "Service C", endpointUrl: "http://serverc.staging.com/healthcheck" }
-                ]),
-                HealthNetDashboard.createEnvironment("Development", [
-                    { endpointName: "Service A", endpointUrl: "http://servera.development.com/healthcheck" },
-                    { endpointName: "Service B", endpointUrl: "http://serverb.development.com/healthcheck" },
-                    { endpointName: "Service C", endpointUrl: "http://serverc.development.com/healthcheck" }
-                ])
-            ]);
-    dashboard.checkHealth();
+  var dashboard = new HealthNetDashboard("healthCheckDashboard",
+    [
+      HealthNetDashboard.createEnvironment("Production", [
+        { endpointName: "Service A", endpointUrl: "http://servera.production.com/healthcheck" },
+        { endpointName: "Service B", endpointUrl: "http://serverb.production.com/healthcheck" },
+        { endpointName: "Service C", endpointUrl: "http://serverc.production.com/healthcheck" }
+      ]),
+      HealthNetDashboard.createEnvironment("Staging", [
+        { endpointName: "Service A", endpointUrl: "http://servera.staging.com/healthcheck" },
+        { endpointName: "Service B", endpointUrl: "http://serverb.staging.com/healthcheck" },
+        { endpointName: "Service C", endpointUrl: "http://serverc.staging.com/healthcheck" }
+      ]),
+      HealthNetDashboard.createEnvironment("Development", [
+        { endpointName: "Service A", endpointUrl: "http://servera.development.com/healthcheck" },
+        { endpointName: "Service B", endpointUrl: "http://serverb.development.com/healthcheck" },
+        { endpointName: "Service C", endpointUrl: "http://serverc.development.com/healthcheck" }
+      ])
+    ]);
+  dashboard.checkHealth();
 </script>
 </body>
 </html>

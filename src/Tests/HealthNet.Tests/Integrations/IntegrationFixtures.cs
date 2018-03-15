@@ -26,9 +26,19 @@ namespace HealthNet.Integrations
       using (var server = new TestServer(new WebHostBuilder()
         .ConfigureServices(services =>
         {
+          var config = GetConfiguration();
           services.AddTransient(x => CreateCheckers());
-          services.AddHealthNet(GetConfiguration());
-
+          if (config == null)
+          {
+            services.AddHealthNet<TestHealthNetConfiguration>();
+          }
+          else
+          {
+            services.AddTransient<IVersionProvider, AssemblyFileVersionProvider>();
+            services.AddTransient(x => config);
+            services.AddHealthNet();
+          }
+         
           ConfigureDependencies(services);
         })
         .Configure(app => runner.Configure(app).Run(async context =>
@@ -46,7 +56,7 @@ namespace HealthNet.Integrations
 
     protected virtual IHealthNetConfiguration GetConfiguration()
     {
-      return new TestHealthNetConfiguration();
+      return null;
     }
 
     protected virtual void ConfigureDependencies(IServiceCollection services)
