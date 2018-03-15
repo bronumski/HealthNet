@@ -225,26 +225,26 @@ Content-Type: application/json;charset=utf-8
 ```
 ```json
 {
-    "host": "host1",
-    "checkupDate": "2015-06-03T15:08:35.8104214Z",
-    "health": "Good",
-    "systemStates": [
-        {
-            "health": "Good",
-            "isVital": true,
-            "systemName": "Non Intrusive Health Check",
-            "timeTaken": "00:00:00.5014515"
-        },
-        {
-            "health": "Undetermined",
-            "isVital": true,
-            "message": "Intrusive check skipped",
-            "systemName": "Intrusive Health Check",
-            "timeTaken": "00:00:00.000"
-        }
-    ],
-    "systemVersion": "1.2.3.4",
-    "timeTaken": "00:00:00.5088545"
+  "host": "host1",
+  "checkupDate": "2015-06-03T15:08:35.8104214Z",
+  "health": "Good",
+  "systemStates": [
+    {
+      "health": "Good",
+      "isVital": true,
+      "systemName": "Non Intrusive Health Check",
+      "timeTaken": "00:00:00.5014515"
+    },
+    {
+      "health": "Undetermined",
+      "isVital": true,
+      "message": "Intrusive check skipped",
+      "systemName": "Intrusive Health Check",
+      "timeTaken": "00:00:00.000"
+    }
+  ],
+  "systemVersion": "1.2.3.4",
+  "timeTaken": "00:00:00.5088545"
 }
 ```
 
@@ -256,25 +256,25 @@ Content-Type: application/json;charset=utf-8
 ```
 ```json
 {
-    "host": "host2",
-    "checkupDate": "2015-06-03T15:08:35.8104214Z",
-    "health": "Good",
-    "systemStates": [
-        {
-            "health": "Good",
-            "isVital": true,
-            "systemName": "Non Intrusive Health Check",
-            "timeTaken": "00:00:00.5014515"
-        },
-        {
-            "health": "Good",
-            "isVital": true,
-            "systemName": "Intrusive Health Check",
-            "timeTaken": "00:00:00.000"
-        }
-    ],
-    "systemVersion": "1.2.3.4",
-    "timeTaken": "00:00:00.5088545"
+  "host": "host2",
+  "checkupDate": "2015-06-03T15:08:35.8104214Z",
+  "health": "Good",
+  "systemStates": [
+    {
+      "health": "Good",
+      "isVital": true,
+      "systemName": "Non Intrusive Health Check",
+      "timeTaken": "00:00:00.5014515"
+    },
+    {
+      "health": "Good",
+      "isVital": true,
+      "systemName": "Intrusive Health Check",
+      "timeTaken": "00:00:00.000"
+    }
+  ],
+  "systemVersion": "1.2.3.4",
+  "timeTaken": "00:00:00.5088545"
 }
 ```
 
@@ -288,8 +288,8 @@ you can use the healthnet dashboard javascript and stylesheet bundled with the r
 ```html
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>ACME Dashboard</title>
+  <meta charset="UTF-8">
+  <title>ACME Dashboard</title>
 </head>
 <body>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/bronumski/HealthNet/release/1.1.0.46/src/DashBoard/HealthNetDashboard.css">
