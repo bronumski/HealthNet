@@ -91,7 +91,7 @@ If needed a custom implementation of `IVersionProvider` can be supplied instead.
 
 ### AspNet Core
 
-* Install the latest [`HealthNet.Owin`](https://www.nuget.org/packages/HealthNet.AspNetCore/) package.
+* Install the latest [`HealthNet.AspNetCore`](https://www.nuget.org/packages/HealthNet.AspNetCore/) package.
 
 `dotnet add package HealthNet.AspNetCore`
 
