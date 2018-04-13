@@ -1,7 +1,7 @@
 namespace HealthNet
 {
-    public interface IVersionProvider
-    {
-        string GetSystemVersion();
-    }
+  public interface IVersionProvider
+  {
+    string GetSystemVersion();
+  }
 }

@@ -36,14 +36,14 @@ public class TestSystemChecker : ISystemChecker
     return this.CreateGoodResult();
   }
 
-  //Tells the health check service that this checker is intrusive and should be skipped
-  //unless doing a thorough exam
+  // Tells the health check service that this checker is intrusive and should be skipped
+  // unless doing a thorough exam
   public bool IsIntrusive { get { return false; } }
   
-  //The Name to be returned in the health check result
+  // The Name to be returned in the health check result
   public string SystemName { get { return "Test Checker"; } }
   
-  //Provides information in the health check as to whether this is a vital system or not
+  // Provides information in the health check as to whether this is a vital system or not
   public bool IsVital { get { return true; } }
 }
 ```
@@ -81,11 +81,59 @@ public class CustomHealthCheckConfiguration : IHealthNetConfiguration
 public class CustmHealthCheckConfiguration : HealthNetConfiguration {}
 ```
 
+## Version Provider
+
+By default the service will use the `AssemblyFileVersionProvider` which pulls the file version of the assembly containing the configuration class.
+
+If needed a custom implementation of `IVersionProvider` can be supplied instead. 
+
 ## Wiring it up
+
+### AspNet Core
+
+* Install the latest [`HealthNet.AspNetCore`](https://www.nuget.org/packages/HealthNet.AspNetCore/) package.
+
+`dotnet add package HealthNet.AspNetCore`
+
+`Install-Package HealthNet.AspNetCore`
+
+* Create a custom `HealthNetConfiguration` class
+
+```csharp
+public class Startup
+{
+  public void ConfigureServices(IServiceCollection services)
+  {
+    ...
+    // Automatic wire up of all implementations of ISystemChecker in assembly containing config
+    services.AddHealthNet<CustomHealthCheckConfiguration>();
+    // If assembly contains an implementation of IVersionProvider that will be used instead of
+    // the built in AssemblyFileVersionProvider
+
+    // Manual wire up
+    services.AddTransient<IHealthNetConfiguration, CustomHealthCheckConfiguration>();
+    services.AddTransient<ISystemChecker, FooSystemChecker>();
+    services.AddHealthNet();
+    ...
+  }
+
+  public void Configure(IApplicationBuilder app)
+  {
+    ...
+    app.UseHealthNet();
+    ...
+  }
+}
+```
 
 ### Owin
 
 * Install the latest [`HealthNet.Owin`](https://www.nuget.org/packages/HealthNet.Owin/) package.
+
+`dotnet add package HealthNet.Owin`
+
+`Install-Package HealthNet.Owin`
+
 * Create a custom `HealthNetConfiguration` class
 * Provide a function to the middleware to resolve an enumeration of `ISystemChecker`
 
@@ -103,6 +151,11 @@ public void Configuration(IAppBuilder app)
 ### WebApi 2
 
 * Install the latest [`HealthNet.WebApi`](https://www.nuget.org/packages/HealthNet.WebApi/) package.
+
+`dotnet add package HealthNet.WebApi`
+
+`Install-Package HealthNet.WebApi`
+
 * Create a custom `HealthNetConfiguration` class
 * Add the custom `HealthNetConfiguration` class and any implementation of `ISystemChecker` to your IoC of choice
 
@@ -128,6 +181,11 @@ protected void Application_Start()
 ### NancyFx
 
 * Install the latest [`HealthNet.Nancy`](https://www.nuget.org/packages/HealthNet.Nancy/) package.
+
+`dotnet add package HealthNet.Nancy`
+
+`Install-Package HealthNet.Nancy`
+
 * Create a custom `HealthNetConfiguration` class
 * Add the custom `HealthNetConfiguration` class and any implementation of `ISystemChecker` to your IoC of choice
 
@@ -167,26 +225,26 @@ Content-Type: application/json;charset=utf-8
 ```
 ```json
 {
-    "host": "host1",
-    "checkupDate": "2015-06-03T15:08:35.8104214Z",
-    "health": "Good",
-    "systemStates": [
-        {
-            "health": "Good",
-            "isVital": true,
-            "systemName": "Non Intrusive Health Check",
-            "timeTaken": "00:00:00.5014515"
-        },
-        {
-            "health": "Undetermind",
-            "isVital": true,
-            "message": "Intrusive check skipped",
-            "systemName": "Intrusive Health Check",
-            "timeTaken": "00:00:00.000"
-        }
-    ],
-    "systemVersion": "1.2.3.4",
-    "timeTaken": "00:00:00.5088545"
+  "host": "host1",
+  "checkupDate": "2015-06-03T15:08:35.8104214Z",
+  "health": "Good",
+  "systemStates": [
+    {
+      "health": "Good",
+      "isVital": true,
+      "systemName": "Non Intrusive Health Check",
+      "timeTaken": "00:00:00.5014515"
+    },
+    {
+      "health": "Undetermined",
+      "isVital": true,
+      "message": "Intrusive check skipped",
+      "systemName": "Intrusive Health Check",
+      "timeTaken": "00:00:00.000"
+    }
+  ],
+  "systemVersion": "1.2.3.4",
+  "timeTaken": "00:00:00.5088545"
 }
 ```
 
@@ -198,25 +256,25 @@ Content-Type: application/json;charset=utf-8
 ```
 ```json
 {
-    "host": "host2",
-    "checkupDate": "2015-06-03T15:08:35.8104214Z",
-    "health": "Good",
-    "systemStates": [
-        {
-            "health": "Good",
-            "isVital": true,
-            "systemName": "Non Intrusive Health Check",
-            "timeTaken": "00:00:00.5014515"
-        },
-        {
-            "health": "Good",
-            "isVital": true,
-            "systemName": "Intrusive Health Check",
-            "timeTaken": "00:00:00.000"
-        }
-    ],
-    "systemVersion": "1.2.3.4",
-    "timeTaken": "00:00:00.5088545"
+  "host": "host2",
+  "checkupDate": "2015-06-03T15:08:35.8104214Z",
+  "health": "Good",
+  "systemStates": [
+    {
+      "health": "Good",
+      "isVital": true,
+      "systemName": "Non Intrusive Health Check",
+      "timeTaken": "00:00:00.5014515"
+    },
+    {
+      "health": "Good",
+      "isVital": true,
+      "systemName": "Intrusive Health Check",
+      "timeTaken": "00:00:00.000"
+    }
+  ],
+  "systemVersion": "1.2.3.4",
+  "timeTaken": "00:00:00.5088545"
 }
 ```
 
@@ -230,8 +288,8 @@ you can use the healthnet dashboard javascript and stylesheet bundled with the r
 ```html
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>ACME Dashboard</title>
+  <meta charset="UTF-8">
+  <title>ACME Dashboard</title>
 </head>
 <body>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/bronumski/HealthNet/release/1.1.0.46/src/DashBoard/HealthNetDashboard.css">
@@ -241,25 +299,25 @@ you can use the healthnet dashboard javascript and stylesheet bundled with the r
 <div id="healthCheckDashboard"></div>
 
 <script type="application/javascript">
-    var dashboard = new HealthNetDashboard("healthCheckDashboard",
-            [
-                HealthNetDashboard.createEnvironment("Production", [
-                    { endpointName: "Service A", endpointUrl: "http://servera.production.com/healthcheck" },
-                    { endpointName: "Service B", endpointUrl: "http://serverb.production.com/healthcheck" },
-                    { endpointName: "Service C", endpointUrl: "http://serverc.production.com/healthcheck" }
-                ]),
-                HealthNetDashboard.createEnvironment("Staging", [
-                    { endpointName: "Service A", endpointUrl: "http://servera.staging.com/healthcheck" },
-                    { endpointName: "Service B", endpointUrl: "http://serverb.staging.com/healthcheck" },
-                    { endpointName: "Service C", endpointUrl: "http://serverc.staging.com/healthcheck" }
-                ]),
-                HealthNetDashboard.createEnvironment("Development", [
-                    { endpointName: "Service A", endpointUrl: "http://servera.development.com/healthcheck" },
-                    { endpointName: "Service B", endpointUrl: "http://serverb.development.com/healthcheck" },
-                    { endpointName: "Service C", endpointUrl: "http://serverc.development.com/healthcheck" }
-                ])
-            ]);
-    dashboard.checkHealth();
+  var dashboard = new HealthNetDashboard("healthCheckDashboard",
+    [
+      HealthNetDashboard.createEnvironment("Production", [
+        { endpointName: "Service A", endpointUrl: "http://servera.production.com/healthcheck" },
+        { endpointName: "Service B", endpointUrl: "http://serverb.production.com/healthcheck" },
+        { endpointName: "Service C", endpointUrl: "http://serverc.production.com/healthcheck" }
+      ]),
+      HealthNetDashboard.createEnvironment("Staging", [
+        { endpointName: "Service A", endpointUrl: "http://servera.staging.com/healthcheck" },
+        { endpointName: "Service B", endpointUrl: "http://serverb.staging.com/healthcheck" },
+        { endpointName: "Service C", endpointUrl: "http://serverc.staging.com/healthcheck" }
+      ]),
+      HealthNetDashboard.createEnvironment("Development", [
+        { endpointName: "Service A", endpointUrl: "http://servera.development.com/healthcheck" },
+        { endpointName: "Service B", endpointUrl: "http://serverb.development.com/healthcheck" },
+        { endpointName: "Service C", endpointUrl: "http://serverc.development.com/healthcheck" }
+      ])
+    ]);
+  dashboard.checkHealth();
 </script>
 </body>
 </html>

@@ -2,10 +2,10 @@
 
 namespace HealthNet
 {
-    public interface IHealthNetConfiguration
-    {
-        string Path { get; }
+  public interface IHealthNetConfiguration
+  {
+    string Path { get; }
 
-        TimeSpan DefaultSystemCheckTimeout { get; }
-    }
+    TimeSpan DefaultSystemCheckTimeout { get; }
+  }
 }

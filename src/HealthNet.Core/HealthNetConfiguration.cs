@@ -2,10 +2,16 @@
 
 namespace HealthNet
 {
-    public abstract class HealthNetConfiguration : IHealthNetConfiguration
+  public abstract class HealthNetConfiguration : IHealthNetConfiguration
+  {
+    public virtual string Path
     {
-        public virtual string Path { get { return "/api/healthcheck"; } }
-
-        public TimeSpan DefaultSystemCheckTimeout { get { return TimeSpan.FromSeconds(10); } }
+      get { return "/api/healthcheck"; }
     }
+
+    public TimeSpan DefaultSystemCheckTimeout
+    {
+      get { return TimeSpan.FromSeconds(10); }
+    }
+  }
 }

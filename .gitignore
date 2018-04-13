@@ -5,7 +5,10 @@
 [Pp]ackages/
 [Pp]ublish/
 build/_results/
+.vs/
+.vscode/
 .idea/
+.fake/
 *.suo
 *.user
 _ReSharper*/
@@ -16,3 +19,4 @@ _TeamCity*/
 *.ReSharper/
 *.dotCover
 *.dbmdl
+TestResults.xml

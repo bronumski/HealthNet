@@ -4,18 +4,18 @@ using NUnit.Framework;
 
 namespace HealthNet.HealthCheckServiceFixtures
 {
-    class When_getting_the_status_of_an_application_with_a_critical_vital_system : HealthCheckServiceFixtureBase
+  class When_getting_the_status_of_an_application_with_a_critical_vital_system : HealthCheckServiceFixtureBase
+  {
+    protected override IEnumerable<ISystemChecker> SystemStateCheckers()
     {
-        protected override IEnumerable<ISystemChecker> SystemStateCheckers()
-        {
-            yield return CreateChecker(HealthState.Critical);
-            yield return CreateChecker(HealthState.Critical, isVital: false);
-        }
-
-        [Test]
-        public void Overall_health_is_Critical()
-        {
-            Result.Health.Should().Be(HealthState.Critical);
-        }
+      yield return CreateChecker(HealthState.Critical);
+      yield return CreateChecker(HealthState.Critical, isVital: false);
     }
+
+    [Test]
+    public void Overall_health_is_Critical()
+    {
+      Result.Health.Should().Be(HealthState.Critical);
+    }
+  }
 }

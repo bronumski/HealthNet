@@ -1,55 +1,82 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using HealthNet.AspNetCore;
 using HealthNet.Integrations.Runners;
-using Microsoft.Owin.Testing;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using NUnit.Framework;
-using Owin;
 
 namespace HealthNet.Integrations
 {
-    [TestFixture(typeof(NancyFixturesRunner))]
-    [TestFixture(typeof(OwinFixturesRunner))]
-    [TestFixture(typeof(WebApiFixturesRunner))]
-    abstract class IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
+  [TestFixture(typeof(NancyFixturesRunner))]
+  [TestFixture(typeof(OwinFixturesRunner))]
+  [TestFixture(typeof(WebApiFixturesRunner))]
+  [TestFixture(typeof(AspNetCoreFixturesRunner))]
+  abstract class IntegrationFixtures<TFixtureRunner> where TFixtureRunner : IFixtureRunner, new()
+  {
+    [OneTimeSetUp]
+    public void SetUp()
     {
-        [TestFixtureSetUp]
-        public void SetUp()
+      IFixtureRunner runner = new TFixtureRunner();
+      using (var server = new TestServer(new WebHostBuilder()
+        .ConfigureServices(services =>
         {
-            IFixtureRunner runner = new TFixtureRunner();
-            using (var server = TestServer.Create(app => runner.Configure(app, GetConfiguration(), CreateCheckers()).Run(context =>
-                {
-                    context.Response.ContentType = "text/plain";
-                    return context.Response.WriteAsync("Hello World");
-                })))
-            {
-                Response = server.HttpClient.GetAsync(Path).Result;
-
-                RawContent = Response.Content.ReadAsStringAsync().Result;
-            }
-
-            Console.WriteLine(RawContent);
-        }
-
-        protected virtual IHealthNetConfiguration GetConfiguration()
+          var config = GetConfiguration();
+          services.AddTransient(x => CreateCheckers());
+          if (config == null)
+          {
+            services.AddHealthNet<TestHealthNetConfiguration>();
+          }
+          else
+          {
+            services.AddTransient<IVersionProvider, AssemblyFileVersionProvider>();
+            services.AddTransient(x => config);
+            services.AddHealthNet();
+          }
+         
+          ConfigureDependencies(services);
+        })
+        .Configure(app => runner.Configure(app).Run(async context =>
         {
-            return new TestHealthNetConfiguration();
-        }
+          context.Response.ContentType = "text/plain";
+          await context.Response.WriteAsync("Hello World");
+        }))))
+      {
+        Response = server.CreateClient().GetAsync(Path).Result;
 
-        protected virtual string Path { get { return "/api/healthcheck" + (IsIntrusive ? "?intrusive=true" : string.Empty); } }
-
-        protected virtual bool IsIntrusive { get { return false; } }
-
-        protected HttpResponseMessage Response { get; private set; }
-
-        protected string RawContent { get; private set; }
-
-        protected virtual IEnumerable<ISystemChecker> CreateCheckers()
-        {
-            var systemChecker = Substitute.For<ISystemChecker>();
-            systemChecker.CheckSystem().Returns(new SystemCheckResult());
-            yield return systemChecker;
-        }
+        RawContent = Response.Content.ReadAsStringAsync().Result;
+      }
+      Console.WriteLine(RawContent);
     }
+
+    protected virtual IHealthNetConfiguration GetConfiguration()
+    {
+      return null;
+    }
+
+    protected virtual void ConfigureDependencies(IServiceCollection services)
+    {
+
+    }
+
+    protected virtual string Path => $"/api/healthcheck{(IsIntrusive ? "?intrusive=true" : string.Empty)}";
+
+    protected virtual bool IsIntrusive => false;
+
+    protected HttpResponseMessage Response { get; private set; }
+
+    protected string RawContent { get; private set; }
+
+    protected virtual IEnumerable<ISystemChecker> CreateCheckers()
+    {
+      var systemChecker = Substitute.For<ISystemChecker>();
+      systemChecker.CheckSystem().Returns(new SystemCheckResult());
+      yield return systemChecker;
+    }
+  }
 }

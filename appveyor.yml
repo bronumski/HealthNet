@@ -1,4 +1,4 @@
-version: 1.1.0.{build}
+version: 1.2.{build}
 
 skip_tags: true
 
@@ -8,8 +8,6 @@ environment:
 
 build_script:
   - Build.bat
-  - ps: $wc = New-Object 'System.Net.WebClient'
-  - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\src\tests\TestResults.xml))
 
 test: off
 
