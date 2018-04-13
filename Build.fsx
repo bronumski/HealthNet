@@ -58,7 +58,7 @@ Target "CreatePackage" (fun _ ->
         Configuration = "Release"
         Project = projFile
         OutputPath = "../../bin"
-        VersionSuffix = "dotnet-core-beta"
+        //VersionSuffix = "dotnet-core-beta"
         AdditionalArgs = [ "--no-build"
                            "--no-restore"
                            "/p:Authors=bronumski"
