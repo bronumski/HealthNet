@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Newtonsoft.Json;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -37,6 +38,7 @@ namespace HealthNet.HealthCheckServiceFixtures
       if (Task.WaitAll(new Task[] {task}, TimeSpan.FromSeconds(20)))
       {
         result = task.Result;
+        Console.WriteLine($"Health check result:{Environment.NewLine}{JsonConvert.SerializeObject(result)}");
       }
       else
       {
@@ -45,21 +47,15 @@ namespace HealthNet.HealthCheckServiceFixtures
     }
 
     [Test]
-    public void Overall_health_is_Serious()
-    {
-      result.Health.Should().Be(HealthState.Serious);
-    }
+    public void Overall_health_is_Serious() 
+      => result.Health.Should().Be(HealthState.Serious);
 
     [Test]
     public void Healthy_system_checker_result_is_returned()
-    {
-      result.SystemStates.Single(x => x.SystemName == "Healthy checker").Health.Should().Be(HealthState.Good);
-    }
+      => result.SystemStates.Single(x => x.SystemName == "Healthy checker").Health.Should().Be(HealthState.Good);
 
     [Test]
     public void Hanging_system_checker_result_is_returned()
-    {
-      result.SystemStates.Single(x => x.SystemName == "Hanging checker").Health.Should().Be(HealthState.Serious);
-    }
+      => result.SystemStates.Single(x => x.SystemName == "Hanging checker").Health.Should().Be(HealthState.Serious);
   }
 }
