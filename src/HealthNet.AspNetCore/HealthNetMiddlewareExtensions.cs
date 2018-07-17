@@ -19,7 +19,7 @@ namespace HealthNet.AspNetCore
       return service.AddTransient<HealthCheckService>();
     }
 
-    public static IServiceCollection AddHealthNet<THealthNetConfig>(this IServiceCollection service) where THealthNetConfig : class, IHealthNetConfiguration
+    public static IServiceCollection AddHealthNet<THealthNetConfig>(this IServiceCollection service, bool autoRegisterCheckers = true) where THealthNetConfig : class, IHealthNetConfiguration
     {
       var assembyTypes = typeof(THealthNetConfig).Assembly.GetTypes();
 
@@ -30,12 +30,15 @@ namespace HealthNet.AspNetCore
 
       service.AddSingleton(VersionProviderType, versionProvider ?? typeof(AssemblyFileVersionProvider));
 
-      var systemCheckers = assembyTypes
-        .Where(x => x.IsClass && !x.IsAbstract && SystemCheckerType.IsAssignableFrom(x));
-
-      foreach (var checkerType in systemCheckers)
+      if (autoRegisterCheckers)
       {
-        service.AddTransient(SystemCheckerType, checkerType);
+        var systemCheckers = assembyTypes
+          .Where(x => x.IsClass && !x.IsAbstract && SystemCheckerType.IsAssignableFrom(x));
+
+        foreach (var checkerType in systemCheckers)
+        {
+          service.AddTransient(SystemCheckerType, checkerType);
+        }
       }
 
       return service.AddHealthNet();
