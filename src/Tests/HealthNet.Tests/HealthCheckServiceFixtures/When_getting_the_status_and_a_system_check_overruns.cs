@@ -20,16 +20,17 @@ namespace HealthNet.HealthCheckServiceFixtures
       hangingChecker.SystemName.Returns("Hanging checker");
       hangingChecker.CheckSystem().Returns(x =>
       {
-        Thread.Sleep(TimeSpan.FromSeconds(2));
+        Thread.Sleep(TimeSpan.FromSeconds(10));
         return (SystemCheckResult) null;
       });
 
       var healthyChecker = Substitute.For<ISystemChecker>();
+      healthyChecker.SystemName.Returns("Healthy checker");
       healthyChecker.CheckSystem()
-        .Returns(x => new SystemCheckResult {SystemName = "Healthy checker", Health = HealthState.Good});
+        .Returns(x => new SystemCheckResult {SystemName = healthyChecker.SystemName, Health = HealthState.Good});
 
       var healthNetConfiguration = Substitute.For<IHealthNetConfiguration>();
-      healthNetConfiguration.DefaultSystemCheckTimeout.Returns(TimeSpan.FromSeconds(1));
+      healthNetConfiguration.DefaultSystemCheckTimeout.Returns(TimeSpan.FromSeconds(4));
 
       var service = new HealthCheckService(healthNetConfiguration, Substitute.For<IVersionProvider>(),
         new[] {hangingChecker, healthyChecker});
@@ -53,10 +54,10 @@ namespace HealthNet.HealthCheckServiceFixtures
 
     [Test]
     public void Healthy_system_checker_result_is_returned()
-      => result.SystemStates.Single(x => x.SystemName == "Healthy checker").Health.Should().Be(HealthState.Good);
+      => result.SystemStates.Should().ContainSingle(x => x.SystemName == "Healthy checker").Which.Health.Should().Be(HealthState.Good);
 
     [Test]
     public void Hanging_system_checker_result_is_returned()
-      => result.SystemStates.Single(x => x.SystemName == "Hanging checker").Health.Should().Be(HealthState.Serious);
+      => result.SystemStates.Should().ContainSingle(x => x.SystemName == "Hanging checker").Which.Health.Should().Be(HealthState.Serious);
   }
 }
