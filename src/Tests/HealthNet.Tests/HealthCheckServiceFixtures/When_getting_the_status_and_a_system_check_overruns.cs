@@ -38,10 +38,11 @@ namespace HealthNet.HealthCheckServiceFixtures
       if (Task.WaitAll(new Task[] {task}, TimeSpan.FromSeconds(20)))
       {
         result = task.Result;
-        Console.WriteLine($"Health check result:{Environment.NewLine}{JsonConvert.SerializeObject(result)}");
+        TestContext.Progress.WriteLine($"Health check result:{Environment.NewLine}{JsonConvert.SerializeObject(result)}");
       }
       else
       {
+        TestContext.Progress.WriteLine("Healthcheck timed out");
         throw new TimeoutException();
       }
     }
