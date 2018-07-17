@@ -19,7 +19,7 @@ namespace HealthNet.HealthCheckServiceFixtures
       hangingChecker.SystemName.Returns("Hanging checker");
       hangingChecker.CheckSystem().Returns(x =>
       {
-        Thread.Sleep(TimeSpan.FromSeconds(20));
+        Thread.Sleep(TimeSpan.FromSeconds(2));
         return (SystemCheckResult) null;
       });
 
@@ -34,7 +34,7 @@ namespace HealthNet.HealthCheckServiceFixtures
         new[] {hangingChecker, healthyChecker});
 
       var task = Task<HealthResult>.Factory.StartNew(() => service.CheckHealth());
-      if (Task.WaitAll(new Task[] {task}, TimeSpan.FromSeconds(10)))
+      if (Task.WaitAll(new Task[] {task}, TimeSpan.FromSeconds(20)))
       {
         result = task.Result;
       }
